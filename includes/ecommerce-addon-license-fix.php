@@ -1,5 +1,5 @@
 <?php
-if ( ! class_exists( 'MI_Product_GA_eCommerce', false ) && class_exists( 'MI_Product' ) ){
+if ( ! class_exists( 'MI_Product_GA_eCommerce', false ) && class_exists( 'MI_Product' ) ) {
 
 	/**
 	 * Class MI_Product_GA_eCommerce
@@ -17,6 +17,7 @@ if ( ! class_exists( 'MI_Product_GA_eCommerce', false ) && class_exists( 'MI_Pro
 
 
 		public function __construct() {
+
 			parent::__construct(
 				'https://www.monsterinsights.com',
 				'eCommerce Addon',
@@ -52,11 +53,12 @@ if ( ! class_exists( 'MI_Product_GA_eCommerce', false ) && class_exists( 'MI_Pro
 		 *
 		 * @since 3.0
 		 *
-		 * @param $extensions
+		 * @param        $extensions
 		 *
 		 * @return mixed
 		 */
 		public function filter_extension_is_active( $extensions ) {
+
 			if ( $this->license_manager->license_is_valid() ) {
 				$extensions['ecommerce']->status = 'active';
 			} else {
@@ -72,6 +74,7 @@ if ( ! class_exists( 'MI_Product_GA_eCommerce', false ) && class_exists( 'MI_Pro
 		 * @since 3.0
 		 */
 		public function action_show_license_form() {
+
 			echo $this->license_manager->show_license_form( false );
 		}
 
