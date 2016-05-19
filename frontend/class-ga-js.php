@@ -16,6 +16,7 @@ class Yoast_GA_JS extends Yoast_GA_Tracking {
 	 * @return null|array
 	 */
 	public function tracking( $return_array = false ) {
+
 		global $wp_query;
 
 		if ( $this->do_tracking() && ! is_preview() ) {
@@ -26,8 +27,7 @@ class Yoast_GA_JS extends Yoast_GA_Tracking {
 
 			if ( isset( $this->options['subdomain_tracking'] ) && $this->options['subdomain_tracking'] != '' ) {
 				$domain = esc_attr( $this->options['subdomain_tracking'] );
-			}
-			else {
+			} else {
 				$domain = null; // Default domain value
 			}
 
@@ -78,28 +78,23 @@ class Yoast_GA_JS extends Yoast_GA_Tracking {
 
 			if ( is_404() ) {
 				$gaq_push[] = "'_trackPageview','/404.html?page=' + document.location.pathname + document.location.search + '&from=' + document.referrer";
-			}
-			else {
+			} else {
 				if ( $wp_query->is_search ) {
 					$pushstr = "'_trackPageview','/?s=";
 					if ( $wp_query->found_posts == 0 ) {
 						$gaq_push[] = $pushstr . 'no-results:' . rawurlencode( $wp_query->query_vars['s'] ) . "&cat=no-results'";
-					}
-					else {
+					} else {
 						if ( $wp_query->found_posts == 1 ) {
 							$gaq_push[] = $pushstr . rawurlencode( $wp_query->query_vars['s'] ) . "&cat=1-result'";
-						}
-						else {
+						} else {
 							if ( $wp_query->found_posts > 1 && $wp_query->found_posts < 6 ) {
 								$gaq_push[] = $pushstr . rawurlencode( $wp_query->query_vars['s'] ) . "&cat=2-5-results'";
-							}
-							else {
+							} else {
 								$gaq_push[] = $pushstr . rawurlencode( $wp_query->query_vars['s'] ) . "&cat=plus-5-results'";
 							}
 						}
 					}
-				}
-				else {
+				} else {
 					$gaq_push[] = "'_trackPageview'";
 				}
 			}
@@ -122,8 +117,7 @@ class Yoast_GA_JS extends Yoast_GA_Tracking {
 			if ( ! $this->debug_mode() ) {
 				require( 'views/tracking-ga-js.php' );
 			}
-		}
-		else {
+		} else {
 			$this->disabled_usergroup();
 		}
 	}
@@ -134,6 +128,7 @@ class Yoast_GA_JS extends Yoast_GA_Tracking {
 	 * @return string
 	 */
 	public function get_tracking_prefix() {
+
 		return ( empty( $this->options['trackprefix'] ) ) ? '/yoast-ga/' : $this->options['trackprefix'];
 	}
 
@@ -146,6 +141,7 @@ class Yoast_GA_JS extends Yoast_GA_Tracking {
 	 * @return mixed
 	 */
 	protected function output_parse_link( $label, $matches ) {
+
 		$link = $this->get_target( $label, $matches );
 
 		// bail early for links that we can't handle
@@ -160,8 +156,7 @@ class Yoast_GA_JS extends Yoast_GA_Tracking {
 			case 'download':
 				if ( $this->options['track_download_as'] == 'pageview' ) {
 					$onclick = "_gaq.push(['_trackPageview','download/" . esc_js( $full_url ) . "']);";
-				}
-				else {
+				} else {
 					$onclick = "_gaq.push(['_trackEvent','download','" . esc_js( $full_url ) . "']);";
 				}
 
@@ -188,4 +183,3 @@ class Yoast_GA_JS extends Yoast_GA_Tracking {
 	}
 
 }
-
