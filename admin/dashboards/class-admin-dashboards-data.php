@@ -20,6 +20,7 @@ class Yoast_GA_Dashboards_Data {
 	 * @return array
 	 */
 	public static function get( $type ) {
+
 		$option = get_option( 'yst_ga_' . $type );
 
 		if ( false === $option ) {
@@ -44,6 +45,7 @@ class Yoast_GA_Dashboards_Data {
 	 * @return bool
 	 */
 	public static function set( $type, $value, $start_date, $end_date, $store_as ) {
+
 		$store = array(
 			'store_as'   => $store_as,
 			'type'       => $type,
@@ -63,6 +65,7 @@ class Yoast_GA_Dashboards_Data {
 	 * @return bool
 	 */
 	public static function reset( $type ) {
+
 		return update_option( 'yst_ga_' . $type, array() );
 	}
 }
