@@ -36,6 +36,7 @@ class Yoast_GA_Dashboards_Graph_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * Construct will set all values and generate the date for response
 	 */
 	public function __construct() {
+
 		parent::__construct();
 
 		$this->set_date_field();
@@ -49,6 +50,7 @@ class Yoast_GA_Dashboards_Graph_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * @return string
 	 */
 	public function get_json() {
+
 		$return = array(
 			'data'    => $this->data,
 			'mapping' => $this->mapping,
@@ -79,6 +81,7 @@ class Yoast_GA_Dashboards_Graph_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * Which field should be taken from timestamp. Most cases J will be good
 	 */
 	private function set_date_field() {
+
 		switch ( $this->period ) {
 			default:
 			case 'lastweek' :
@@ -94,6 +97,7 @@ class Yoast_GA_Dashboards_Graph_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * Generate the data for the frontend based on the $google_data
 	 */
 	private function generate() {
+
 		$google_data = $this->get_google_data();
 
 		foreach ( $google_data as $timestamp => $value ) {
@@ -116,6 +120,7 @@ class Yoast_GA_Dashboards_Graph_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * @param integer $value
 	 */
 	private function add_data( $value ) {
+
 		static $current_x = 0;
 
 		$this->data[] = array(
@@ -147,8 +152,8 @@ class Yoast_GA_Dashboards_Graph_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * @param integer $value
 	 */
 	private function add_hover_mapping( $timestamp, $value ) {
+
 		$this->mapping['hover'][] = esc_html( date_i18n( 'l ' . $this->date_field . ' M', $timestamp ) . ': ' . number_format_i18n( $value, 0 ) );
 	}
 
 }
-
