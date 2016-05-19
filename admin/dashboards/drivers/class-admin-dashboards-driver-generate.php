@@ -32,6 +32,7 @@ abstract class Yoast_GA_Dashboards_Driver_Generate {
 	 * Construct will set all values and generate the date for response
 	 */
 	public function __construct() {
+
 		$this->set_graph_type();
 		$this->set_period();
 		$this->set_end_date();
@@ -42,6 +43,7 @@ abstract class Yoast_GA_Dashboards_Driver_Generate {
 	 * Getting graph_id from post and strip HTML-prefix graph- to get the type
 	 */
 	protected function set_graph_type() {
+
 		$graph_id         = filter_input( INPUT_GET, 'graph_id' );
 		$graph_type       = str_replace( array( 'graph-', 'table-' ), '', $graph_id );
 		$this->graph_type = $graph_type;
@@ -51,6 +53,7 @@ abstract class Yoast_GA_Dashboards_Driver_Generate {
 	 * Getting the period from post
 	 */
 	protected function set_period() {
+
 		$this->period = filter_input( INPUT_GET, 'period' );
 	}
 
@@ -58,6 +61,7 @@ abstract class Yoast_GA_Dashboards_Driver_Generate {
 	 * Setting the end date
 	 */
 	protected function set_end_date() {
+
 		$this->end_date = time();
 	}
 
@@ -95,8 +99,7 @@ abstract class Yoast_GA_Dashboards_Driver_Generate {
 
 		if ( $response != array() && array_key_exists( 'body', $response['value'] ) ) {
 			$return = $response['value']['body'];
-		}
-		else {
+		} else {
 			$return = $response;
 		}
 
@@ -111,6 +114,7 @@ abstract class Yoast_GA_Dashboards_Driver_Generate {
 	 * @return bool
 	 */
 	protected function is_date_in_period( $timestamp ) {
+
 		return ( $timestamp >= $this->start_date && $timestamp <= $this->end_date );
 	}
 
@@ -122,14 +126,14 @@ abstract class Yoast_GA_Dashboards_Driver_Generate {
 	 * @return array|boolean The data array which is escaped
 	 */
 	protected function escape_strings_array( $data ) {
+
 		if ( is_array( $data ) ) {
 			foreach ( $data as $key => $value ) {
 				if ( is_array( $value ) ) {
 					foreach ( $value as $subkey => $subvar ) {
 						$data[ $key ][ $subkey ] = esc_html( $subvar );
 					}
-				}
-				else {
+				} else {
 					$data[ $key ] = esc_html( (string) $value );
 				}
 			}
