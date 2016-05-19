@@ -53,8 +53,8 @@ class Yoast_Googleanalytics_Reporting {
 			foreach ( $raw_data['body']['rows'] as $key => $item ) {
 				if ( $store_as == 'datelist' ) {
 					$data[ (int) $this->format_ga_date( $item[0] ) ] = $this->parse_row( $item );
-				}
-				else {
+				} else
+				{
 					$data[] = $this->parse_data_row( $item );
 				}
 			}
@@ -143,7 +143,7 @@ class Yoast_Googleanalytics_Reporting {
 	 * @return array
 	 */
 	private function date_range( $current, $last, $step = '+1 day', $format = 'Y-m-d' ) {
-		$dates   = array();
+		$dates = array();
 
 		while ( $current <= $last ) {
 			$dates[] = date( $format, $current );
