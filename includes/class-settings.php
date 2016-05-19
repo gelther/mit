@@ -31,6 +31,7 @@ class Yoast_GA_Settings {
 	 * Set the options of Google Analytics
 	 */
 	protected function __construct() {
+
 		$this->options_class = Yoast_GA_Options::instance();
 		$this->options       = $this->options_class->get_options();
 	}
@@ -41,6 +42,7 @@ class Yoast_GA_Settings {
 	 * @return object|Yoast_GA_Settings
 	 */
 	public static function get_instance() {
+
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new Yoast_GA_Settings();
 		}
@@ -54,6 +56,7 @@ class Yoast_GA_Settings {
 	 * @return bool
 	 */
 	public function dashboards_disabled() {
+
 		return $this->options_class->option_value_to_bool( 'dashboards_disabled' );
 	}
 
