@@ -30,7 +30,6 @@ class Yoast_Google_Analytics {
 
 	/**
 	 * Singleton
-	 *
 	 */
 	protected function __construct() {
 
@@ -53,6 +52,7 @@ class Yoast_Google_Analytics {
 	 * @return null|Yoast_Google_Analytics
 	 */
 	public static function get_instance() {
+
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
@@ -80,7 +80,6 @@ class Yoast_Google_Analytics {
 
 			add_action( 'admin_notices', array( 'Yoast_Google_Analytics_Notice', $notice_type ) );
 		}
-
 	}
 
 	/**
@@ -91,6 +90,7 @@ class Yoast_Google_Analytics {
 	 * @return boolean
 	 */
 	public function authenticate( $authentication_code = null ) {
+
 		// When authentication again we should clean up some stuff
 		$this->api_cleanup();
 
@@ -106,6 +106,7 @@ class Yoast_Google_Analytics {
 	 * @return array
 	 */
 	public function get_profiles() {
+
 		$accounts = $this->format_profile_call(
 			$this->do_request( 'https://www.googleapis.com/analytics/v3/management/accountSummaries' )
 		);
@@ -138,7 +139,6 @@ class Yoast_Google_Analytics {
 				'body'     => json_decode( $response->getResponseBody(), true ),
 			);
 		}
-
 	}
 
 
@@ -147,6 +147,7 @@ class Yoast_Google_Analytics {
 	 * @return bool
 	 */
 	public function has_refresh_token() {
+
 		return $this->client->is_authenticated();
 	}
 
@@ -156,6 +157,7 @@ class Yoast_Google_Analytics {
 	 * @return mixed
 	 */
 	public function get_options() {
+
 		return get_option( $this->option_name );
 	}
 
@@ -165,6 +167,7 @@ class Yoast_Google_Analytics {
 	 * @return bool
 	 */
 	public function check_google_access_from_wp() {
+
 		$can_access_google = true;
 		if ( defined( 'WP_HTTP_BLOCK_EXTERNAL' ) && WP_HTTP_BLOCK_EXTERNAL ) {
 			$can_access_google = false;
@@ -181,6 +184,7 @@ class Yoast_Google_Analytics {
 	 * Check if we can access Google Apis from this server by making a dummy connection
 	 */
 	public function check_google_access() {
+
 		return $this->test_connection_to_google();
 	}
 
@@ -188,6 +192,7 @@ class Yoast_Google_Analytics {
 	 * Updating the options based on $this->option_name and the internal property $this->options
 	 */
 	protected function update_options() {
+
 		update_option( $this->option_name, $this->options );
 	}
 
@@ -197,6 +202,7 @@ class Yoast_Google_Analytics {
 	 * The filter is a hook to override the configuration/
 	 */
 	protected function set_client() {
+
 		// See https://developers.google.com/identity/protocols/OAuth2InstalledApp#formingtheurl for more details about these fields.
 		$config = array(
 			'application_name' => 'Google Analytics by Yoast',
@@ -217,6 +223,7 @@ class Yoast_Google_Analytics {
 	 * @return mixed
 	 */
 	public function create_auth_url() {
+
 		return $this->client->createAuthUrl();
 	}
 
@@ -226,6 +233,7 @@ class Yoast_Google_Analytics {
 	 * @param array $accounts
 	 */
 	protected function save_profile_response( $accounts ) {
+
 		$this->options['ga_api_response_accounts'] = $accounts;
 
 		$this->update_options();
@@ -237,6 +245,7 @@ class Yoast_Google_Analytics {
 	 * @return bool
 	 */
 	private function test_connection_to_google() {
+
 		$wp_http = new WP_Http();
 		if ( $wp_http->block_request( 'https://www.googleapis.com/analytics/v3/management/accountSummaries' ) === false ) {
 			return true;
@@ -305,6 +314,7 @@ class Yoast_Google_Analytics {
 	 * Doing some clean up when this method is called
 	 */
 	private function api_cleanup() {
+
 		delete_option( 'yst_ga_api_call_fail' );
 	}
 
@@ -319,6 +329,7 @@ class Yoast_Google_Analytics_Notice {
 	 * Throw a warning if no UA code is set.
 	 */
 	public static function config_warning() {
+
 		self::show_error(
 			sprintf( __( 'Please configure your %sGoogle Analytics settings%s!', 'google-analytics-for-wordpress' ),
 				'<a href="' . admin_url( 'admin.php?page=yst_ga_settings' ) . '">',
@@ -331,6 +342,7 @@ class Yoast_Google_Analytics_Notice {
 	 * Throw a warning when the fetching failed
 	 */
 	public static function warning_fetching_data_authenticate() {
+
 		self::show_error(
 			sprintf(
 				__( 'It seems the authentication for the plugin has expired, please %sre-authenticate%s with Google Analytics to allow the plugin to fetch data.', 'google-analytics-for-wordpress' ),
@@ -344,6 +356,7 @@ class Yoast_Google_Analytics_Notice {
 	 * Throw a warning when the fetching failed
 	 */
 	public static function warning_fetching_data() {
+
 		self::show_error(
 			sprintf(
 				__( 'Data is not up-to-date, there was an error in retrieving the data from Google Analytics. This error could be caused by several issues. If the error persists, please see %sthis page%s.', 'google-analytics-for-wordpress' ),
@@ -359,6 +372,7 @@ class Yoast_Google_Analytics_Notice {
 	 * @param string $error_message
 	 */
 	private static function show_error( $error_message ) {
+
 		echo '<div class="error"><p>' . $error_message . '</p></div>';
 	}
 
