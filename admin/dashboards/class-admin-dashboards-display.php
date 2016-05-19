@@ -38,7 +38,6 @@ class Yoast_GA_Dashboards_Display {
 	 * @return Yoast_GA_Dasboards_Graph
 	 */
 	public static function get_instance() {
-
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
@@ -63,12 +62,11 @@ class Yoast_GA_Dashboards_Display {
 	 *
 	 * If driver doesn't exist, it will be created first
 	 *
-	 * @param string $dashboard_type - The name of the driver that will be returned
+	 * @param  string $dashboard_type - The name of the driver that will be returned
 	 *
 	 * @return object
 	 */
 	private function driver( $dashboard_type ) {
-
 		if ( ! $this->driver_exists( $dashboard_type ) ) {
 			$this->create_driver( $dashboard_type );
 		}
@@ -108,7 +106,6 @@ class Yoast_GA_Dashboards_Display {
 	 * @param string $tab_to_show
 	 */
 	public function display( $tab_to_show ) {
-
 		$dashboards_to_show = $this->dashboards;
 
 		foreach ( $dashboards_to_show as $dashboard_name => $dashboard_settings ) {
@@ -121,7 +118,7 @@ class Yoast_GA_Dashboards_Display {
 	/**
 	 * Check if given $dashboard_type exists and if it's an object
 	 *
-	 * @param string $dashboard_type
+	 * @param  string $dashboard_type
 	 *
 	 * @return bool
 	 */
@@ -135,7 +132,7 @@ class Yoast_GA_Dashboards_Display {
 	 * @param string $dashboard_type
 	 */
 	protected function create_driver( $dashboard_type ) {
-		$driver_class                   = 'Yoast_GA_Dashboards_' . ucfirst( $dashboard_type );
+		$driver_class                     = 'Yoast_GA_Dashboards_' . ucfirst( $dashboard_type );
 		$this->drivers[ $dashboard_type ] = new $driver_class();
 	}
 
