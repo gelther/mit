@@ -78,7 +78,7 @@ class Yoast_GA_Dashboards {
 	 *
 	 * By hook as filter: $dashboards = apply_filters( 'ga_extend_dashboards', $dashboards);
 	 *
-	 * @param array $dashboards
+	 * @param  array $dashboards
 	 *
 	 * @return mixed
 	 */
@@ -105,7 +105,7 @@ class Yoast_GA_Dashboards {
 	/**
 	 * Register the dashboard types
 	 *
-	 * @param array|string $types
+	 * @param  array|string $types
 	 *
 	 * @return bool
 	 */
@@ -233,7 +233,7 @@ class Yoast_GA_Dashboards {
 	/**
 	 * Validate the registered types of dashboards
 	 *
-	 * @param array $types
+	 * @param  array $types
 	 *
 	 * @return bool
 	 */
