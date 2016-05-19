@@ -49,8 +49,8 @@ $extensions = $yoast_ga_admin->get_extensions();
 		<?php
 		if ( ! $has_extensions ) {
 			echo '<p>' . __( 'You have not installed any extensions for Google Analytics by MonsterInsights, so there are no licenses to activate.', 'google-analytics-for-wordpress' ) . '</p>';
-		}
-		else {
+		} else
+		{
 			do_action( 'yst_ga_show_license_form' );
 		}
 		?>
@@ -60,4 +60,3 @@ $extensions = $yoast_ga_admin->get_extensions();
 
 <?php
 echo $yoast_ga_admin->content_footer();
-?>
