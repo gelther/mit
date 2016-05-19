@@ -39,4 +39,4 @@ php:
     whitespace_before_function_parentheses: no_space
 
     #Experimental code rule
-    doc_param_return_tags_alignment: no_align
+    #doc_param_return_tags_alignment: no_align
