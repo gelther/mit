@@ -28,8 +28,8 @@ class Yoast_GA_Utils {
 	/**
 	 * Calculate the date difference, return the amount of hours between the two dates
 	 *
-	 * @param integer $last_run datetime
-	 * @param integer $now      datetime
+	 * @param  integer $last_run datetime
+	 * @param  integer $now      datetime
 	 *
 	 * @return int
 	 */
