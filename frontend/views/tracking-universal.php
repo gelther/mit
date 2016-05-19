@@ -16,10 +16,10 @@
 if ( count( $gaq_push ) >= 1 ) {
 	foreach ( $gaq_push as $item ) {
 		if ( ! is_array( $item ) ) {
-			echo '	__gaTracker('.$item.");\n";
+			echo '	__gaTracker(' . $item . ");\n";
 		}
 		elseif ( isset( $item['value'] ) ) {
-			echo '	'.$item['value'] . "\n";
+			echo '	' . $item['value'] . "\n";
 		}
 	}
 }
