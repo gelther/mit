@@ -11,14 +11,14 @@ class Yoast_GA_Universal extends Yoast_GA_Tracking {
 	/**
 	 * Test helper function
 	 */
-	public function get_options(){
+	public function get_options() {
 		return $this->options;
 	}
 
 	/**
 	 * Function to output the GA Tracking code in the wp_head()
 	 *
-	 * @param boolean $return_array
+	 * @param  boolean    $return_array
 	 *
 	 * @return null|array
 	 */
@@ -83,10 +83,10 @@ class Yoast_GA_Universal extends Yoast_GA_Tracking {
 			}
 
 			/**
-			* Filter: 'yst_ga_filter_push_vars' - Allow changing the $gaq_push variables before scripts are required.
-			*
-			* @api array
-			*/
+			 * Filter: 'yst_ga_filter_push_vars' - Allow changing the $gaq_push variables before scripts are required.
+			 *
+			 * @api array
+			 */
 			if ( has_filter( 'yst_ga_filter_push_vars' ) && $value_to_push = apply_filters( 'yst_ga_filter_push_vars', $gaq_push ) ) {
 				$gaq_push[] = $value_to_push;
 			}
@@ -155,8 +155,8 @@ class Yoast_GA_Universal extends Yoast_GA_Tracking {
 	/**
 	 * Ouput tracking link
 	 *
-	 * @param string $label
-	 * @param array  $matches
+	 * @param  string $label
+	 * @param  array  $matches
 	 *
 	 * @return mixed
 	 */
