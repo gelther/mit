@@ -24,6 +24,7 @@ class Yoast_GA_Dashboards_Table extends Yoast_GA_Dashboards_Driver {
 	 * @return Yoast_GA_Dashboards_Table_Generate
 	 */
 	protected function get_dashboard_generate_object() {
+
 		return new Yoast_GA_Dashboards_Table_Generate();
 	}
 
