@@ -17,6 +17,7 @@ class Yoast_GA_Dashboards_Table_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * Construct will set all values and generate the date for response
 	 */
 	public function __construct() {
+
 		parent::__construct();
 
 		$this->set_dimension_id();
@@ -30,6 +31,7 @@ class Yoast_GA_Dashboards_Table_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * @return string
 	 */
 	public function get_json() {
+
 		$return = array(
 			'data' => $this->escape_strings_array( $this->data ),
 		);
@@ -45,6 +47,7 @@ class Yoast_GA_Dashboards_Table_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * @return integer
 	 */
 	protected function filter_google_data( $google_data ) {
+
 		return $google_data['value'];
 	}
 
@@ -53,12 +56,12 @@ class Yoast_GA_Dashboards_Table_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * handle the request correctly
 	 */
 	private function set_dimension_id() {
+
 		$this->dimension_id = filter_input( INPUT_GET, 'dimension_id' );
 
 		if ( ! empty( $this->dimension_id ) ) {
 			$this->graph_type = 'ga:dimension' . $this->dimension_id;
-		}
-		else {
+		} else {
 			$this->graph_type = $this->graph_type;
 		}
 	}
@@ -67,6 +70,7 @@ class Yoast_GA_Dashboards_Table_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * Generate the data for the frontend based on the $google_data
 	 */
 	private function generate() {
+
 		$google_data = $this->get_google_data();
 		$this->data  = is_array( $google_data ) ? array_values( $google_data ) : array();
 	}
