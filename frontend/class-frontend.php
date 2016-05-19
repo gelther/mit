@@ -15,7 +15,6 @@ class Yoast_GA_Frontend {
 	 * Class constructor
 	 */
 	public function __construct() {
-
 		$this->options = Yoast_GA_Options::instance()->options;
 
 		if ( isset( $this->options['tag_links_in_rss'] ) && $this->options['tag_links_in_rss'] == 1 ) {
@@ -29,13 +28,12 @@ class Yoast_GA_Frontend {
 		else {
 			new Yoast_GA_JS;
 		}
-
 	}
 
 	/**
 	 * Add the UTM source parameters in the RSS feeds to track traffic
 	 *
-	 * @param string $guid
+	 * @param  string $guid
 	 *
 	 * @return string
 	 */
