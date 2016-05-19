@@ -38,5 +38,5 @@ php:
     whitespace_before_function_close: no_space
     whitespace_before_function_parentheses: no_space
 
-    // Experimental code rule
+    #Experimental code rule
     doc_param_return_tags_alignment: no_align
