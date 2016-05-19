@@ -16,7 +16,7 @@ if ( count( $gaq_push ) >= 1 ) {
 			echo '	_gaq.push([' . $item . "]);\n";
 		}
 		elseif ( isset( $item['value'] ) ) {
-			echo '	'.$item['value'] . "\n";
+			echo '	' . $item['value'] . "\n";
 		}
 	}
 }
