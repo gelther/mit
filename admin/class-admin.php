@@ -27,18 +27,15 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 		}
 
 		add_action( 'admin_init', array( $this, 'system_info' ) );
-
 	}
 
 	/**
 	 * Init function when the plugin is loaded
 	 */
 	public function init_ga() {
-
 		new Yoast_GA_Admin_Menu( $this );
 
 		add_filter( 'plugin_action_links_' . plugin_basename( GAWP_FILE ), array( $this, 'add_action_links' ) );
-
 	}
 
 	/**
@@ -99,7 +96,6 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 	 * @param array $data
 	 */
 	public function save_settings( $data ) {
-
 		unset( $data['google_auth_code'] );
 
 		foreach ( $data as $key => $value ) {
@@ -158,7 +154,7 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 		$validation = $this->validate_settings();
 		if ( is_wp_error( $validation ) ) {
 			$this->add_notification( 'ga_notifications', array(
-				'type' => 'error',
+				'type'        => 'error',
 				'description' => $validation->get_error_message(),
 			) );
 
@@ -173,7 +169,6 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 	 * @return true|WP_Error true or an error object.
 	 */
 	protected function validate_settings() {
-
 		if ( ! empty( $this->options['manual_ua_code_field'] ) ) {
 			$this->options['manual_ua_code_field'] = trim( $this->options['manual_ua_code_field'] );
 			// en dash to minus, prevents issue with code copied from web with "fancy" dash
@@ -192,8 +187,8 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 		/**
 		 * Filters the validation for the admin options
 		 *
-		 * @param true|WP_Error true if the validation is successful, WP_Error on error.
-		 * @param array $this->options The options that are being saved.
+		 * @param true|WP_Error                true if the validation is successful, WP_Error on error.
+		 * @param array         $this->options The options that are being saved.
 		 */
 		return apply_filters( 'yst_ga_admin_validate_settings', true, $this->options );
 	}
@@ -238,7 +233,7 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 		}
 
 		if ( isset( $_POST['ga-form-settings'] ) && wp_verify_nonce( $_POST['yoast_ga_nonce'], 'save_settings' ) ) {
-			if ( ! isset ( $_POST['ignore_users'] ) ) {
+			if ( ! isset( $_POST['ignore_users'] ) ) {
 				$_POST['ignore_users'] = array();
 			}
 
@@ -256,7 +251,7 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 	/**
 	 * Is there selected an other property in the settings post? Returns true or false.
 	 *
-	 * @param array $post
+	 * @param  array $post
 	 *
 	 * @return bool
 	 */
@@ -291,7 +286,7 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 	/**
 	 * Transform the Profile ID into an helpful UA code
 	 *
-	 * @param integer $profile_id
+	 * @param  integer $profile_id
 	 *
 	 * @return null
 	 */
@@ -315,7 +310,7 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 	/**
 	 * Add a link to the settings page to the plugins list
 	 *
-	 * @param array $links array of links for the plugins, adapted when the current plugin is found.
+	 * @param  array $links array of links for the plugins, adapted when the current plugin is found.
 	 *
 	 * @return array $links
 	 */
@@ -348,7 +343,6 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 	 * Load the page of a menu item in the GA plugin
 	 */
 	public function load_page() {
-
 		if ( ! has_action( 'yst_ga_custom_dimensions_tab-content' ) ) {
 			add_action( 'yst_ga_custom_dimensions_tab-content', array( $this, 'premium_promo' ) );
 		}
@@ -497,7 +491,6 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 	 * Render the admin page footer with sidebar for the GA Plugin
 	 */
 	public function content_footer() {
-
 		do_action( 'yoast_ga_admin_footer' );
 
 		if ( class_exists( 'MI_Product_GA_Premium' ) ) {
@@ -532,7 +525,6 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 		shuffle( $banners );
 
 		require 'views/content-footer.php';
-
 	}
 
 	/**
