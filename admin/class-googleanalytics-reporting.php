@@ -34,10 +34,10 @@ class Yoast_Googleanalytics_Reporting {
 	/**
 	 * Format a response
 	 *
-	 * @param array  $raw_data
-	 * @param string $store_as
-	 * @param string $start_date
-	 * @param string $end_date
+	 * @param  array  $raw_data
+	 * @param  string $store_as
+	 * @param  string $start_date
+	 * @param  string $end_date
 	 *
 	 * @return array
 	 */
@@ -70,7 +70,7 @@ class Yoast_Googleanalytics_Reporting {
 	/**
 	 * Check the key on valid unix timestamps and remove invalid keys
 	 *
-	 * @param array $data
+	 * @param  array $data
 	 *
 	 * @return array
 	 */
@@ -87,7 +87,7 @@ class Yoast_Googleanalytics_Reporting {
 	/**
 	 * Format the GA date value
 	 *
-	 * @param string $date
+	 * @param  string $date
 	 *
 	 * @return int
 	 */
@@ -102,7 +102,7 @@ class Yoast_Googleanalytics_Reporting {
 	/**
 	 * Parse a row and return an array with the correct data rows
 	 *
-	 * @param array $item
+	 * @param  array $item
 	 *
 	 * @return array
 	 */
@@ -121,7 +121,7 @@ class Yoast_Googleanalytics_Reporting {
 	/**
 	 * Parse a row for the list storage type
 	 *
-	 * @param array $item
+	 * @param  array $item
 	 *
 	 * @return array
 	 */
@@ -135,15 +135,15 @@ class Yoast_Googleanalytics_Reporting {
 	/**
 	 * Calculate the date range between 2 dates
 	 *
-	 * @param string $current
-	 * @param string $last
-	 * @param string $step
-	 * @param string $format
+	 * @param  string $current
+	 * @param  string $last
+	 * @param  string $step
+	 * @param  string $format
 	 *
 	 * @return array
 	 */
 	private function date_range( $current, $last, $step = '+1 day', $format = 'Y-m-d' ) {
-		$dates   = array();
+		$dates = array();
 
 		while ( $current <= $last ) {
 			$dates[] = date( $format, $current );
