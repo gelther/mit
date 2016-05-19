@@ -40,7 +40,7 @@ class Yoast_GA_Dashboards_Table_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	/**
 	 * Filtering the current data to eliminate all values which are not in given period
 	 *
-	 * @param integer $google_data
+	 * @param  integer $google_data
 	 *
 	 * @return integer
 	 */
