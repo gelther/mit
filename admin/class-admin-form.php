@@ -16,7 +16,7 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Create a form element to init a form
 	 *
-	 * @param string $namespace
+	 * @param  string $namespace
 	 *
 	 * @return string
 	 */
@@ -35,9 +35,9 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Return the form end tag and the submit button
 	 *
-	 * @param string $button_label
-	 * @param string $name
-	 * @param string $onclick
+	 * @param  string      $button_label
+	 * @param  string      $name
+	 * @param  string      $onclick
 	 *
 	 * @return null|string
 	 */
@@ -46,7 +46,7 @@ class Yoast_GA_Admin_Form {
 			$button_label = __( 'Save changes', 'google-analytics-for-wordpress' );
 		}
 
-		$output = null;
+		$output  = null;
 		$output .= '<div class="ga-form ga-form-input">';
 		$output .= '<input type="submit" name="ga-form-' . $name . '" value="' . $button_label . '" class="button button-primary ga-form-submit" id="yoast-ga-form-submit-' . self::$form_namespace . '"';
 		if ( ! is_null( $onclick ) ) {
@@ -62,11 +62,11 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Create a input form element with our labels and wrap them
 	 *
-	 * @param string      $type
-	 * @param null|string $title
-	 * @param null|string $name
-	 * @param null|string $text_label
-	 * @param null|string $description
+	 * @param  string      $type
+	 * @param  null|string $title
+	 * @param  null|string $name
+	 * @param  null|string $text_label
+	 * @param  null|string $description
 	 *
 	 * @return null|string
 	 */
@@ -119,12 +119,12 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Generate a select box
 	 *
-	 * @param string      $title
-	 * @param string      $name
-	 * @param array       $values
-	 * @param null|string $description
-	 * @param bool        $multiple
-	 * @param string      $empty_text
+	 * @param  string      $title
+	 * @param  string      $name
+	 * @param  array       $values
+	 * @param  null|string $description
+	 * @param  bool        $multiple
+	 * @param  string      $empty_text
 	 *
 	 * @return null|string
 	 */
@@ -174,9 +174,9 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Generate a textarea field
 	 *
-	 * @param string      $title
-	 * @param string      $name
-	 * @param null|string $description
+	 * @param  string      $title
+	 * @param  string      $name
+	 * @param  null|string $description
 	 *
 	 * @return null|string
 	 */
@@ -206,13 +206,12 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Parsing a option string for select
 	 *
-	 * @param string $select_value
-	 * @param string $value
+	 * @param  string $select_value
+	 * @param  string $value
 	 *
 	 * @return string
 	 */
 	private static function option( $select_value, $value ) {
-
 		if ( is_array( $select_value ) ) {
 			if ( in_array( esc_attr( $value['id'] ), $select_value ) ) {
 				return '<option value="' . esc_attr( $value['id'] ) . '" selected="selected">' . esc_attr( stripslashes( $value['name'] ) ) . '</option>';
@@ -230,8 +229,8 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Show a question mark with help
 	 *
-	 * @param string $id
-	 * @param string $description
+	 * @param  string $id
+	 * @param  string $description
 	 *
 	 * @return string
 	 */
@@ -245,7 +244,7 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Will parse the optgroups.
 	 *
-	 * @param array $values
+	 * @param  array $values
 	 *
 	 * @return array
 	 */
@@ -263,9 +262,9 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Creates a label
 	 *
-	 * @param string $id
-	 * @param string $title
-	 * @param string $type
+	 * @param  string $id
+	 * @param  string $title
+	 * @param  string $type
 	 *
 	 * @return string
 	 */
@@ -276,9 +275,9 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Creates a optgroup with the items. If items contain items it will create a nested optgroup
 	 *
-	 * @param string $optgroup
-	 * @param array  $value
-	 * @param array  $select_value
+	 * @param  string $optgroup
+	 * @param  array  $value
+	 * @param  array  $select_value
 	 *
 	 * @return string
 	 */
@@ -304,7 +303,7 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Getting the value from the option, if it doesn't exist return empty string
 	 *
-	 * @param string $name
+	 * @param  string $name
 	 *
 	 * @return string
 	 */
@@ -322,7 +321,7 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Parsing given array with attributes as an attribute string
 	 *
-	 * @param array $attributes_to_parse
+	 * @param  array  $attributes_to_parse
 	 *
 	 * @return string
 	 */
