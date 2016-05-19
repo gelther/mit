@@ -28,7 +28,7 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Function to output the GA Tracking code in the wp_head()
 	 *
-	 * @param bool $return_array
+	 * @param  bool  $return_array
 	 *
 	 * @return mixed
 	 */
@@ -37,8 +37,8 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Output tracking link
 	 *
-	 * @param string $label
-	 * @param array  $matches
+	 * @param  string $label
+	 * @param  array  $matches
 	 *
 	 * @return mixed
 	 */
@@ -88,7 +88,7 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Parse article link
 	 *
-	 * @param array $matches
+	 * @param  array $matches
 	 *
 	 * @return mixed
 	 */
@@ -99,7 +99,7 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Parse comment link
 	 *
-	 * @param array $matches
+	 * @param  array $matches
 	 *
 	 * @return mixed
 	 */
@@ -110,7 +110,7 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Parse widget link
 	 *
-	 * @param array $matches
+	 * @param  array $matches
 	 *
 	 * @return mixed
 	 */
@@ -121,7 +121,7 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Parse menu link
 	 *
-	 * @param array $matches
+	 * @param  array $matches
 	 *
 	 * @return mixed
 	 */
@@ -132,7 +132,7 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Parse the_content or the_excerpt for links
 	 *
-	 * @param string $text
+	 * @param  string $text
 	 *
 	 * @return mixed
 	 */
@@ -151,7 +151,7 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Parse the widget content for links
 	 *
-	 * @param string $text
+	 * @param  string $text
 	 *
 	 * @return mixed
 	 */
@@ -167,7 +167,7 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Parse the nav menu for links
 	 *
-	 * @param string $text
+	 * @param  string $text
 	 *
 	 * @return mixed
 	 */
@@ -186,7 +186,7 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Parse comment text for links
 	 *
-	 * @param string $text
+	 * @param  string $text
 	 *
 	 * @return mixed
 	 */
@@ -205,7 +205,7 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Parse the domain
 	 *
-	 * @param string $uri
+	 * @param  string     $uri
 	 *
 	 * @return array|bool
 	 */
@@ -235,8 +235,8 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Merge the existing onclick with a new one and append it
 	 *
-	 * @param string $link_attribute
-	 * @param string $onclick
+	 * @param  string $link_attribute
+	 * @param  string $onclick
 	 *
 	 * @return string
 	 */
@@ -263,7 +263,7 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Generate the full URL
 	 *
-	 * @param string $link
+	 * @param  string $link
 	 *
 	 * @return string
 	 */
@@ -283,7 +283,6 @@ abstract class Yoast_GA_Tracking {
 
 	/**
 	 * Setting the filters for tracking outbound links
-	 *
 	 */
 	protected function track_outbound_filters() {
 		add_filter( 'the_content', array( $this, 'the_content' ), 99 );
@@ -301,7 +300,7 @@ abstract class Yoast_GA_Tracking {
 	 */
 	public function do_tracking() {
 		if ( $this->do_tracking === null ) {
-			$user = wp_get_current_user();
+			$user              = wp_get_current_user();
 			$this->do_tracking = true;
 
 			if ( 0 != $user->ID && isset( $this->options['ignore_users'] ) ) {
@@ -327,8 +326,8 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Return the target with a lot of parameters
 	 *
-	 * @param string $category
-	 * @param array  $matches
+	 * @param  string $category
+	 * @param  array  $matches
 	 *
 	 * @return array
 	 */
@@ -359,10 +358,10 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Getting the type for current target
 	 *
-	 * @param string $extension
-	 * @param array  $domain
-	 * @param array  $origin
-	 * @param array  $matches
+	 * @param  string      $extension
+	 * @param  array       $domain
+	 * @param  array       $origin
+	 * @param  array       $matches
 	 *
 	 * @return null|string
 	 */
@@ -395,9 +394,9 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Parse the type for outbound links
 	 *
-	 * @param array  $domain
-	 * @param array  $origin
-	 * @param string $original_url
+	 * @param  array  $domain
+	 * @param  array  $origin
+	 * @param  string $original_url
 	 *
 	 * @return string
 	 */
