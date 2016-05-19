@@ -58,13 +58,13 @@ class Yoast_GA_Options {
 		}
 
 		return self::$instance;
-
 	}
 
 	/**
 	 * Constructor for the options
 	 */
 	public function __construct() {
+
 		$this->options = $this->get_options();
 		$this->options = $this->check_options( $this->options );
 
@@ -96,6 +96,7 @@ class Yoast_GA_Options {
 	 * @return bool
 	 */
 	public function update_option( $val ) {
+
 		$options                         = get_option( $this->option_name );
 		$options[ $this->option_prefix ] = $val;
 
@@ -108,6 +109,7 @@ class Yoast_GA_Options {
 	 * @return mixed|void
 	 */
 	public function get_options() {
+
 		$options = get_option( $this->option_name );
 
 		return $options[ $this->option_prefix ];
@@ -144,13 +146,13 @@ class Yoast_GA_Options {
 	 * @return null
 	 */
 	public function get_tracking_code() {
+
 		$tracking_code = null;
 		$this->options = $this->get_options();
 
 		if ( ! empty( $this->options['analytics_profile'] ) && ! empty( $this->options['analytics_profile_code'] ) ) {
 			$tracking_code = $this->options['analytics_profile_code'];
-		}
-		elseif ( ! empty( $this->options['analytics_profile'] ) && empty( $this->options['analytics_profile_code'] ) ) {
+		} elseif ( ! empty( $this->options['analytics_profile'] ) && empty( $this->options['analytics_profile_code'] ) ) {
 			// Analytics profile is still holding the UA code
 			$tracking_code = $this->options['analytics_profile'];
 		}
@@ -170,6 +172,7 @@ class Yoast_GA_Options {
 	 * @return bool
 	 */
 	public function option_value_to_bool( $option_name ) {
+
 		$this->options = $this->get_options();
 
 		if ( isset( $this->options[ $option_name ] ) && $this->options[ $option_name ] == 1 ) {
@@ -185,6 +188,7 @@ class Yoast_GA_Options {
 	 * @since 5.0.1
 	 */
 	private function upgrade() {
+
 		if ( ! isset( $this->options['version'] ) && is_null( $this->get_tracking_code() ) ) {
 			$old_options = get_option( 'Yoast_Google_Analytics' );
 			if ( isset( $old_options ) && is_array( $old_options ) ) {
@@ -211,13 +215,13 @@ class Yoast_GA_Options {
 			}
 		}
 		// 5.1.2+ Remove firebug_lite from options, if set
-		if ( ! isset ( $this->options['version'] ) || version_compare( $this->options['version'], '5.1.2', '<' ) ) {
+		if ( ! isset( $this->options['version'] ) || version_compare( $this->options['version'], '5.1.2', '<' ) ) {
 			if ( isset( $this->options['firebug_lite'] ) ) {
 				unset( $this->options['firebug_lite'] );
 			}
 		}
 		// 5.2.8+ Add disabled dashboards option
-		if ( ! isset ( $this->options['dashboards_disabled'] ) || version_compare( $this->options['version'], '5.2.8', '>' ) ) {
+		if ( ! isset( $this->options['dashboards_disabled'] ) || version_compare( $this->options['version'], '5.2.8', '>' ) ) {
 			$this->options['dashboards_disabled'] = 0;
 		}
 		// Check is API option already exists - if not add it
@@ -244,6 +248,7 @@ class Yoast_GA_Options {
 	 * @return array
 	 */
 	public function default_ga_values() {
+
 		$options = array(
 			$this->option_prefix => array(
 				'analytics_profile'          => null,
@@ -280,6 +285,7 @@ class Yoast_GA_Options {
 	 * Load plugin textdomain
 	 */
 	public static function load_textdomain() {
+
 		load_plugin_textdomain( 'google-analytics-for-wordpress', false, dirname( plugin_basename( GAWP_FILE ) ) . '/languages/' );
 	}
 
