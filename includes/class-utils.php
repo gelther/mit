@@ -14,6 +14,7 @@ class Yoast_GA_Utils {
 	 * @return bool
 	 */
 	public static function wp_seo_active() {
+
 		$wp_seo_active = false;
 
 		// Makes sure is_plugin_active is available when called from front end
@@ -34,6 +35,7 @@ class Yoast_GA_Utils {
 	 * @return int
 	 */
 	public static function hours_between( $last_run, $now ) {
+
 		$seconds = max( ( $now - $last_run ), 1 );
 		$hours   = ( $seconds / 3600 );
 
