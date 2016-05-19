@@ -46,7 +46,7 @@ class Yoast_GA_Admin_Form {
 			$button_label = __( 'Save changes', 'google-analytics-for-wordpress' );
 		}
 
-		$output = null;
+		$output  = null;
 		$output .= '<div class="ga-form ga-form-input">';
 		$output .= '<input type="submit" name="ga-form-' . $name . '" value="' . $button_label . '" class="button button-primary ga-form-submit" id="yoast-ga-form-submit-' . self::$form_namespace . '"';
 		if ( ! is_null( $onclick ) ) {
@@ -95,8 +95,8 @@ class Yoast_GA_Admin_Form {
 			if ( $input_value == 1 ) {
 				$attributes['checked'] = 'checked';
 			}
-		}
-		else {
+		} else
+		{
 			$attributes['value'] = esc_attr( stripslashes( $input_value ) );
 		}
 
@@ -119,12 +119,12 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Generate a select box
 	 *
-	 * @param string      $title
-	 * @param string      $name
+	 * @param string $title
+	 * @param string $name
 	 * @param array       $values
 	 * @param null|string $description
-	 * @param bool        $multiple
-	 * @param string      $empty_text
+	 * @param bool   $multiple
+	 * @param string $empty_text
 	 *
 	 * @return null|string
 	 */
@@ -140,8 +140,8 @@ class Yoast_GA_Admin_Form {
 
 		if ( $multiple ) {
 			$select .= '<select multiple name="' . $name . '[]" id="yoast-ga-form-select-' . self::$form_namespace . '-' . $id . '" class="ga-multiple">';
-		}
-		else {
+		} else
+		{
 			$select .= '<select data-placeholder="' . $empty_text . '" name="' . $name . '" id="yoast-ga-form-select-' . self::$form_namespace . '-' . $id . '">';
 			if ( ! is_null( $empty_text ) ) {
 				$select .= '<option></option>';
@@ -153,8 +153,8 @@ class Yoast_GA_Admin_Form {
 			foreach ( $values as $optgroup => $value ) {
 				if ( ! empty( $value['items'] ) ) {
 					$select .= self::create_optgroup( $optgroup, $value, $select_value );
-				}
-				else {
+				} else
+				{
 					$select .= self::option( $select_value, $value );
 				}
 			}
@@ -174,8 +174,8 @@ class Yoast_GA_Admin_Form {
 	/**
 	 * Generate a textarea field
 	 *
-	 * @param string      $title
-	 * @param string      $name
+	 * @param string $title
+	 * @param string $name
 	 * @param null|string $description
 	 *
 	 * @return null|string
@@ -212,16 +212,15 @@ class Yoast_GA_Admin_Form {
 	 * @return string
 	 */
 	private static function option( $select_value, $value ) {
-
 		if ( is_array( $select_value ) ) {
 			if ( in_array( esc_attr( $value['id'] ), $select_value ) ) {
 				return '<option value="' . esc_attr( $value['id'] ) . '" selected="selected">' . esc_attr( stripslashes( $value['name'] ) ) . '</option>';
-			}
-			else {
+			} else
+			{
 				return '<option value="' . esc_attr( $value['id'] ) . '">' . esc_attr( stripslashes( $value['name'] ) ) . '</option>';
 			}
-		}
-		else {
+		} else
+		{
 			return '<option value="' . esc_attr( $value['id'] ) . '" ' . selected( $select_value, $value['id'], false ) . '>' . esc_attr( stripslashes( $value['name'] ) ) . '</option>';
 		}
 	}
@@ -289,8 +288,8 @@ class Yoast_GA_Admin_Form {
 			if ( ! empty( $option['items'] ) ) {
 
 				$optgroup .= self::create_optgroup( esc_attr( $option['name'] ), $option, $select_value );
-			}
-			else {
+			} else
+			{
 				$optgroup .= self::option( $select_value, $option );
 			}
 		}
