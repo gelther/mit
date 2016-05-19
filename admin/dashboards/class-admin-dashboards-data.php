@@ -15,7 +15,7 @@ class Yoast_GA_Dashboards_Data {
 	/**
 	 * Get a data object
 	 *
-	 * @param string $type
+	 * @param  string $type
 	 *
 	 * @return array
 	 */
@@ -35,11 +35,11 @@ class Yoast_GA_Dashboards_Data {
 	/**
 	 * Save a data object
 	 *
-	 * @param string $type
-	 * @param array  $value
-	 * @param string $start_date
-	 * @param string $end_date
-	 * @param string $store_as
+	 * @param  string $type
+	 * @param  array  $value
+	 * @param  string $start_date
+	 * @param  string $end_date
+	 * @param  string $store_as
 	 *
 	 * @return bool
 	 */
@@ -58,7 +58,7 @@ class Yoast_GA_Dashboards_Data {
 	/**
 	 * Reset an option of the GA dashboards storage engine
 	 *
-	 * @param string $type
+	 * @param  string $type
 	 *
 	 * @return bool
 	 */
