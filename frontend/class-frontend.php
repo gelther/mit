@@ -15,7 +15,6 @@ class Yoast_GA_Frontend {
 	 * Class constructor
 	 */
 	public function __construct() {
-
 		$this->options = Yoast_GA_Options::instance()->options;
 
 		if ( isset( $this->options['tag_links_in_rss'] ) && $this->options['tag_links_in_rss'] == 1 ) {
@@ -25,17 +24,15 @@ class Yoast_GA_Frontend {
 		// Check if the customer is running Universal or not (Enable in GA Settings -> Universal)
 		if ( isset( $this->options['enable_universal'] ) && $this->options['enable_universal'] == 1 ) {
 			new Yoast_GA_Universal;
-		}
-		else {
+		} else {
 			new Yoast_GA_JS;
 		}
-
 	}
 
 	/**
 	 * Add the UTM source parameters in the RSS feeds to track traffic
 	 *
-	 * @param string $guid
+	 * @param  string $guid
 	 *
 	 * @return string
 	 */
@@ -44,8 +41,7 @@ class Yoast_GA_Frontend {
 		if ( is_feed() ) {
 			if ( $this->options['allow_anchor'] ) {
 				$delimiter = '#';
-			}
-			else {
+			} else {
 				$delimiter = '?';
 				if ( strpos( $guid, $delimiter ) > 0 ) {
 					$delimiter = '&amp;';
