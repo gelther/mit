@@ -12,6 +12,7 @@ class Yoast_GA_Admin_Assets {
 	 * Add the scripts to the admin head
 	 */
 	public static function enqueue_scripts() {
+
 		wp_enqueue_script( 'yoast_focusable', self::get_asset_path( 'assets/dependencies/focusable/focus-element-overlay.min.js' ), array( 'jquery' ), false );
 
 		wp_enqueue_script( 'yoast_ga_admin', self::get_asset_path( 'assets/js/yoast_ga_admin' ) . self::file_ext( '.js' ), array( 'jquery', 'yoast_focusable' ), GAWP_VERSION );
@@ -27,6 +28,7 @@ class Yoast_GA_Admin_Assets {
 	 * Add the styles in the admin head
 	 */
 	public static function enqueue_styles() {
+
 		wp_enqueue_style( 'yoast_ga_styles', self::get_asset_path( 'assets/css/yoast_ga_styles' ) . self::file_ext( '.css' ), array(), GAWP_VERSION );
 	}
 
@@ -34,6 +36,7 @@ class Yoast_GA_Admin_Assets {
 	 * Enqueues the settings page specific styles
 	 */
 	public static function enqueue_settings_styles() {
+
 		// Enqueue the chosen css file
 		wp_enqueue_style( 'chosen_css', self::get_asset_path( 'assets/dependencies/chosen/chosen' ) . self::file_ext( '.css' ), array(), GAWP_VERSION );
 	}
@@ -72,6 +75,7 @@ class Yoast_GA_Admin_Assets {
 	 * @return string
 	 */
 	public static function get_asset_path( $asset ) {
+
 		static $plugin_directory;
 
 		if ( $plugin_directory == null ) {
@@ -91,6 +95,7 @@ class Yoast_GA_Admin_Assets {
 	 * @return string
 	 */
 	private static function file_ext( $ext ) {
+
 		if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
 			$ext = '.min' . $ext;
 		}
