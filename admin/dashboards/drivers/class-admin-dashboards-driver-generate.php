@@ -68,7 +68,6 @@ abstract class Yoast_GA_Dashboards_Driver_Generate {
 	 * See: http://php.net/manual/en/datetime.formats.relative.php
 	 */
 	protected function set_start_date() {
-
 		switch ( $this->period ) {
 			case 'lastweek' :
 				$time = '-6 days';
@@ -90,13 +89,12 @@ abstract class Yoast_GA_Dashboards_Driver_Generate {
 	 * @return array
 	 */
 	protected function get_google_data() {
-
 		$response = Yoast_GA_Dashboards_Data::get( $this->graph_type );
 
 		if ( $response != array() && array_key_exists( 'body', $response['value'] ) ) {
 			$return = $response['value']['body'];
-		}
-		else {
+		} else
+		{
 			$return = $response;
 		}
 
@@ -128,8 +126,8 @@ abstract class Yoast_GA_Dashboards_Driver_Generate {
 					foreach ( $value as $subkey => $subvar ) {
 						$data[ $key ][ $subkey ] = esc_html( $subvar );
 					}
-				}
-				else {
+				} else
+				{
 					$data[ $key ] = esc_html( (string) $value );
 				}
 			}
