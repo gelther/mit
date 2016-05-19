@@ -48,6 +48,7 @@ abstract class Yoast_GA_Tracking {
 	 * Class constructor
 	 */
 	public function __construct() {
+
 		$options_class = $this->get_options_class();
 		$this->options = $options_class->options;
 
@@ -64,6 +65,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return object|Yoast_GA_Options
 	 */
 	protected function get_options_class() {
+
 		return Yoast_GA_Options::instance();
 	}
 
@@ -73,6 +75,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return null
 	 */
 	public function get_tracking_code() {
+
 		return $this->get_options_class()->get_tracking_code();
 	}
 
@@ -82,6 +85,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return mixed
 	 */
 	public function get_enhanced_link_attribution() {
+
 		return $this->options['enhanced_link_attribution'];
 	}
 
@@ -93,6 +97,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return mixed
 	 */
 	public function parse_article_link( $matches ) {
+
 		return $this->output_parse_link( 'outbound-article', $matches );
 	}
 
@@ -104,6 +109,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return mixed
 	 */
 	public function parse_comment_link( $matches ) {
+
 		return $this->output_parse_link( 'outbound-comment', $matches );
 	}
 
@@ -115,6 +121,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return mixed
 	 */
 	public function parse_widget_link( $matches ) {
+
 		return $this->output_parse_link( 'outbound-widget', $matches );
 	}
 
@@ -126,6 +133,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return mixed
 	 */
 	public function parse_nav_menu( $matches ) {
+
 		return $this->output_parse_link( 'outbound-menu', $matches );
 	}
 
@@ -137,6 +145,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return mixed
 	 */
 	public function the_content( $text ) {
+
 		if ( false === $this->do_tracking() ) {
 			return $text;
 		}
@@ -156,6 +165,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return mixed
 	 */
 	public function widget_content( $text ) {
+
 		if ( ! $this->do_tracking() ) {
 			return $text;
 		}
@@ -172,6 +182,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return mixed
 	 */
 	public function nav_menu( $text ) {
+
 		if ( ! $this->do_tracking() ) {
 			return $text;
 		}
@@ -191,6 +202,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return mixed
 	 */
 	public function comment_text( $text ) {
+
 		if ( ! $this->do_tracking() ) {
 			return $text;
 		}
@@ -210,6 +222,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return array|bool
 	 */
 	public function yoast_ga_get_domain( $uri ) {
+
 		$hostPattern     = '/^(https?:\/\/)?([^\/]+)/i';
 		$domainPatternUS = '/[^\.\/]+\.[^\.\/]+$/';
 		$domainPatternUK = '/[^\.\/]+\.[^\.\/]+\.[^\.\/]+$/';
@@ -219,8 +232,7 @@ abstract class Yoast_GA_Tracking {
 			$host = $matches[2];
 			if ( preg_match( '/.*\..*\..*\..*$/', $host ) ) {
 				preg_match( $domainPatternUK, $host, $matches );
-			}
-			else {
+			} else {
 				preg_match( $domainPatternUS, $host, $matches );
 			}
 
@@ -241,6 +253,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return string
 	 */
 	public function output_add_onclick( $link_attribute, $onclick ) {
+
 		if ( preg_match( '/onclick=[\'\"](.*?;)[\'\"]/i', $link_attribute, $matches ) > 0 ) {
 			$js_snippet_single = 'onclick=\'' . $matches[1] . ' ' . $onclick . '\'';
 			$js_snippet_double = 'onclick="' . $matches[1] . ' ' . $onclick . '"';
@@ -249,12 +262,10 @@ abstract class Yoast_GA_Tracking {
 			$link_attribute = str_replace( "onclick='" . $matches[1] . "'", $js_snippet_single, $link_attribute );
 
 			return $link_attribute;
-		}
-		else {
+		} else {
 			if ( ! is_null( $onclick ) ) {
 				return 'onclick="' . $onclick . '" ' . $link_attribute;
-			}
-			else {
+			} else {
 				return $link_attribute;
 			}
 		}
@@ -268,6 +279,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return string
 	 */
 	public function make_full_url( $link ) {
+
 		switch ( $link['type'] ) {
 			case 'download':
 			case 'internal':
@@ -283,9 +295,9 @@ abstract class Yoast_GA_Tracking {
 
 	/**
 	 * Setting the filters for tracking outbound links
-	 *
 	 */
 	protected function track_outbound_filters() {
+
 		add_filter( 'the_content', array( $this, 'the_content' ), 99 );
 		add_filter( 'widget_text', array( $this, 'widget_content' ), 99 );
 		add_filter( 'wp_list_bookmarks', array( $this, 'widget_content' ), 99 );
@@ -300,8 +312,9 @@ abstract class Yoast_GA_Tracking {
 	 * @return bool
 	 */
 	public function do_tracking() {
+
 		if ( $this->do_tracking === null ) {
-			$user = wp_get_current_user();
+			$user              = wp_get_current_user();
 			$this->do_tracking = true;
 
 			if ( 0 != $user->ID && isset( $this->options['ignore_users'] ) ) {
@@ -333,6 +346,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return array
 	 */
 	protected function get_target( $category, $matches ) {
+
 		$protocol     = $matches[3];
 		$original_url = $matches[4];
 		$domain       = $this->yoast_ga_get_domain( $matches[4] );
@@ -361,12 +375,13 @@ abstract class Yoast_GA_Tracking {
 	 *
 	 * @param string $extension
 	 * @param array  $domain
-	 * @param array  $origin
-	 * @param array  $matches
+	 * @param array $origin
+	 * @param array $matches
 	 *
 	 * @return null|string
 	 */
 	protected function get_target_type( $extension, $domain, $origin, $matches ) {
+
 		$download_extensions = explode( ',', str_replace( '.', '', $this->options['extensions_of_files'] ) );
 		$download_extensions = array_map( 'trim', $download_extensions );
 		$protocol            = $matches[3];
@@ -376,15 +391,12 @@ abstract class Yoast_GA_Tracking {
 		$type = null;
 		if ( $protocol !== 'http' && $protocol !== 'https' && $protocol !== 'mailto' ) {
 			$type = null;
-		}
-		else {
+		} else {
 			if ( ( $protocol == 'mailto' ) ) {
 				$type = 'email';
-			}
-			elseif ( in_array( $extension, $download_extensions ) ) {
+			} elseif ( in_array( $extension, $download_extensions ) ) {
 				$type = 'download';
-			}
-			else {
+			} else {
 				$type = $this->parse_outbound_type( $domain, $origin, $original_url );
 			}
 		}
@@ -395,13 +407,14 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Parse the type for outbound links
 	 *
-	 * @param array  $domain
-	 * @param array  $origin
+	 * @param array $domain
+	 * @param array $origin
 	 * @param string $original_url
 	 *
 	 * @return string
 	 */
 	protected function parse_outbound_type( $domain, $origin, $original_url ) {
+
 		$type = null;
 
 		if ( $domain['domain'] == $origin['domain'] ) {
@@ -419,8 +432,7 @@ abstract class Yoast_GA_Tracking {
 			if ( ! isset( $type ) ) {
 				$type = 'internal';
 			}
-		}
-		elseif ( $domain['domain'] != $origin['domain'] ) {
+		} elseif ( $domain['domain'] != $origin['domain'] ) {
 			$type = 'outbound';
 		}
 
@@ -433,6 +445,7 @@ abstract class Yoast_GA_Tracking {
 	 * @return string
 	 */
 	protected function sanitize_internal_label() {
+
 		if ( ! is_null( $this->options['track_internal_as_label'] ) && ! empty( $this->options['track_internal_as_label'] ) ) {
 			$label = $this->options['track_internal_as_label'];
 			$label = trim( $label, ',' );
@@ -451,13 +464,13 @@ abstract class Yoast_GA_Tracking {
 	 * When a usergroup is disabled, show a message in the source to notify the user they are in a disabled user group.
 	 */
 	protected function disabled_usergroup() {
+
 		/* translators %1$s is the product name 'Google Analytics by MonsterInsights'. %2$s displays the plugin version the website uses and a link to the plugin on MonsterInsights.com */
 		echo '<!-- ' . sprintf( __( 'This site uses the %1$s plugin version %2$s', 'google-analytics-for-wordpress' ), 'Google Analytics by MonsterInsights', GAWP_VERSION . ' - https://www.monsterinsights.com/' ) . ' -->';
 
 		if ( current_user_can( 'manage_options' ) ) {
 			echo '<!-- ' . __( '@Webmaster, normally you will find the Google Analytics tracking code here, but you are in the disabled user groups. To change this, navigate to Analytics -> Settings (Ignore usergroups)', 'google-analytics-for-wordpress' ) . ' -->';
-		}
-		else {
+		} else {
 			echo '<!-- ' . __( 'Normally you will find the Google Analytics tracking code here, but the webmaster disabled your user group.', 'google-analytics-for-wordpress' ) . ' -->';
 		}
 
@@ -471,14 +484,14 @@ abstract class Yoast_GA_Tracking {
 	 * @return bool
 	 */
 	protected function debug_mode() {
+
 		if ( $this->options['debug_mode'] === 1 ) {
 			/* translators %1$s is the product name 'Google Analytics by MonsterInsights'. %2$s displays the plugin version the website uses and a link to the plugin on MonsterInsights.com */
 			echo '<!-- ' . sprintf( __( 'This site uses the %1$s plugin version %2$s', 'google-analytics-for-wordpress' ), 'Google Analytics by MonsterInsights', GAWP_VERSION . ' - https://www.monsterinsights.com/' ) . ' -->';
 
 			if ( current_user_can( 'manage_options' ) ) {
 				echo '<!-- ' . __( '@Webmaster, normally you will find the Google Analytics tracking code here, but the Debug Mode is enabled. To change this, navigate to Analytics -> Settings -> (Tab) Debug Mode and disable Debug Mode to enable tracking of your site.', 'google-analytics-for-wordpress' ) . ' -->';
-			}
-			else {
+			} else {
 				echo '<!-- ' . __( 'Normally you will find the Google Analytics tracking code here, but the webmaster has enabled the Debug Mode.', 'google-analytics-for-wordpress' ) . ' -->';
 			}
 
