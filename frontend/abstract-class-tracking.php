@@ -219,8 +219,7 @@ abstract class Yoast_GA_Tracking {
 			$host = $matches[2];
 			if ( preg_match( '/.*\..*\..*\..*$/', $host ) ) {
 				preg_match( $domainPatternUK, $host, $matches );
-			}
-			else {
+			} else {
 				preg_match( $domainPatternUS, $host, $matches );
 			}
 
@@ -249,12 +248,10 @@ abstract class Yoast_GA_Tracking {
 			$link_attribute = str_replace( "onclick='" . $matches[1] . "'", $js_snippet_single, $link_attribute );
 
 			return $link_attribute;
-		}
-		else {
+		} else {
 			if ( ! is_null( $onclick ) ) {
 				return 'onclick="' . $onclick . '" ' . $link_attribute;
-			}
-			else {
+			} else {
 				return $link_attribute;
 			}
 		}
@@ -283,7 +280,6 @@ abstract class Yoast_GA_Tracking {
 
 	/**
 	 * Setting the filters for tracking outbound links
-	 *
 	 */
 	protected function track_outbound_filters() {
 		add_filter( 'the_content', array( $this, 'the_content' ), 99 );
@@ -301,7 +297,7 @@ abstract class Yoast_GA_Tracking {
 	 */
 	public function do_tracking() {
 		if ( $this->do_tracking === null ) {
-			$user = wp_get_current_user();
+			$user              = wp_get_current_user();
 			$this->do_tracking = true;
 
 			if ( 0 != $user->ID && isset( $this->options['ignore_users'] ) ) {
@@ -361,8 +357,8 @@ abstract class Yoast_GA_Tracking {
 	 *
 	 * @param string $extension
 	 * @param array  $domain
-	 * @param array  $origin
-	 * @param array  $matches
+	 * @param array $origin
+	 * @param array $matches
 	 *
 	 * @return null|string
 	 */
@@ -376,15 +372,12 @@ abstract class Yoast_GA_Tracking {
 		$type = null;
 		if ( $protocol !== 'http' && $protocol !== 'https' && $protocol !== 'mailto' ) {
 			$type = null;
-		}
-		else {
+		} else {
 			if ( ( $protocol == 'mailto' ) ) {
 				$type = 'email';
-			}
-			elseif ( in_array( $extension, $download_extensions ) ) {
+			} elseif ( in_array( $extension, $download_extensions ) ) {
 				$type = 'download';
-			}
-			else {
+			} else {
 				$type = $this->parse_outbound_type( $domain, $origin, $original_url );
 			}
 		}
@@ -395,8 +388,8 @@ abstract class Yoast_GA_Tracking {
 	/**
 	 * Parse the type for outbound links
 	 *
-	 * @param array  $domain
-	 * @param array  $origin
+	 * @param array $domain
+	 * @param array $origin
 	 * @param string $original_url
 	 *
 	 * @return string
@@ -419,8 +412,7 @@ abstract class Yoast_GA_Tracking {
 			if ( ! isset( $type ) ) {
 				$type = 'internal';
 			}
-		}
-		elseif ( $domain['domain'] != $origin['domain'] ) {
+		} elseif ( $domain['domain'] != $origin['domain'] ) {
 			$type = 'outbound';
 		}
 
@@ -456,8 +448,7 @@ abstract class Yoast_GA_Tracking {
 
 		if ( current_user_can( 'manage_options' ) ) {
 			echo '<!-- ' . __( '@Webmaster, normally you will find the Google Analytics tracking code here, but you are in the disabled user groups. To change this, navigate to Analytics -> Settings (Ignore usergroups)', 'google-analytics-for-wordpress' ) . ' -->';
-		}
-		else {
+		} else {
 			echo '<!-- ' . __( 'Normally you will find the Google Analytics tracking code here, but the webmaster disabled your user group.', 'google-analytics-for-wordpress' ) . ' -->';
 		}
 
@@ -477,8 +468,7 @@ abstract class Yoast_GA_Tracking {
 
 			if ( current_user_can( 'manage_options' ) ) {
 				echo '<!-- ' . __( '@Webmaster, normally you will find the Google Analytics tracking code here, but the Debug Mode is enabled. To change this, navigate to Analytics -> Settings -> (Tab) Debug Mode and disable Debug Mode to enable tracking of your site.', 'google-analytics-for-wordpress' ) . ' -->';
-			}
-			else {
+			} else {
 				echo '<!-- ' . __( 'Normally you will find the Google Analytics tracking code here, but the webmaster has enabled the Debug Mode.', 'google-analytics-for-wordpress' ) . ' -->';
 			}
 
