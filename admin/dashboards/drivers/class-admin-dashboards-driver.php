@@ -19,6 +19,7 @@ abstract class Yoast_GA_Dashboards_Driver {
 	 * This will initialize the AJAX request
 	 */
 	public function __construct() {
+
 		$this->initialize_ajax();
 	}
 
@@ -28,6 +29,7 @@ abstract class Yoast_GA_Dashboards_Driver {
 	 * Will echo json for graph
 	 */
 	public function get_ajax_data() {
+
 		check_ajax_referer( 'yoast-ga-dashboard-nonce', '_ajax_nonce' );
 
 		$generator = $this->get_dashboard_generate_object();
@@ -63,6 +65,7 @@ abstract class Yoast_GA_Dashboards_Driver {
 	 * @param string $dashboard
 	 */
 	public function display( $dashboard ) {
+
 		$settings = $this->dashboards[ $dashboard ];
 		require dirname( GAWP_FILE ) . '/admin/dashboards/views/' . $this->dashboard_type . '.php';
 	}
@@ -71,6 +74,7 @@ abstract class Yoast_GA_Dashboards_Driver {
 	 * Setting hook for doing ajax request
 	 */
 	protected function initialize_ajax() {
+
 		add_action( $this->ajax_hook, array( $this, 'get_ajax_data' ) );
 	}
 
