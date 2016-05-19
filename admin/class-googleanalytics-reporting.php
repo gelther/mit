@@ -24,6 +24,7 @@ class Yoast_Googleanalytics_Reporting {
 	 * @return null|Yoast_Google_Analytics
 	 */
 	public static function get_instance() {
+
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
@@ -42,6 +43,7 @@ class Yoast_Googleanalytics_Reporting {
 	 * @return array
 	 */
 	public function parse_response( $raw_data, $store_as, $start_date, $end_date ) {
+
 		$data = array();
 
 		if ( $store_as == 'datelist' ) {
@@ -53,8 +55,7 @@ class Yoast_Googleanalytics_Reporting {
 			foreach ( $raw_data['body']['rows'] as $key => $item ) {
 				if ( $store_as == 'datelist' ) {
 					$data[ (int) $this->format_ga_date( $item[0] ) ] = $this->parse_row( $item );
-				}
-				else {
+				} else {
 					$data[] = $this->parse_data_row( $item );
 				}
 			}
@@ -75,6 +76,7 @@ class Yoast_Googleanalytics_Reporting {
 	 * @return array
 	 */
 	private function check_validity_data( $data = array() ) {
+
 		foreach ( $data as $key => $value ) {
 			if ( strlen( $key ) <= 5 ) {
 				unset( $data[ $key ] );
@@ -92,6 +94,7 @@ class Yoast_Googleanalytics_Reporting {
 	 * @return int
 	 */
 	private function format_ga_date( $date ) {
+
 		$year  = substr( $date, 0, 4 );
 		$month = substr( $date, 4, 2 );
 		$day   = substr( $date, 6, 2 );
@@ -107,6 +110,7 @@ class Yoast_Googleanalytics_Reporting {
 	 * @return array
 	 */
 	private function parse_row( $item ) {
+
 		if ( isset( $item[2] ) ) {
 			return array(
 				'date'  => (int) $this->format_ga_date( $item[0] ),
@@ -126,6 +130,7 @@ class Yoast_Googleanalytics_Reporting {
 	 * @return array
 	 */
 	private function parse_data_row( $item ) {
+
 		return array(
 			'name'  => (string) $item[0],
 			'value' => (int) $item[1],
@@ -143,7 +148,8 @@ class Yoast_Googleanalytics_Reporting {
 	 * @return array
 	 */
 	private function date_range( $current, $last, $step = '+1 day', $format = 'Y-m-d' ) {
-		$dates   = array();
+
+		$dates = array();
 
 		while ( $current <= $last ) {
 			$dates[] = date( $format, $current );
