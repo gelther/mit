@@ -52,13 +52,11 @@ class Yoast_GA_Options {
 	 * @return object|Yoast_GA_Options
 	 */
 	public static function instance() {
-
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new Yoast_GA_Options();
 		}
 
 		return self::$instance;
-
 	}
 
 	/**
@@ -91,7 +89,7 @@ class Yoast_GA_Options {
 	/**
 	 * Updates the GA option within the current option_prefix
 	 *
-	 * @param array $val
+	 * @param  array $val
 	 *
 	 * @return bool
 	 */
@@ -117,12 +115,11 @@ class Yoast_GA_Options {
 	 * Check if all the options are set, to prevent a notice if debugging is enabled
 	 * When we have new changes, the settings are saved to the options class
 	 *
-	 * @param array $options
+	 * @param  array $options
 	 *
 	 * @return mixed
 	 */
 	public function check_options( $options ) {
-
 		$changes = 0;
 		foreach ( $this->default_ga_values() as $key => $value ) {
 			if ( ! isset( $options[ $key ] ) ) {
@@ -149,8 +146,7 @@ class Yoast_GA_Options {
 
 		if ( ! empty( $this->options['analytics_profile'] ) && ! empty( $this->options['analytics_profile_code'] ) ) {
 			$tracking_code = $this->options['analytics_profile_code'];
-		}
-		elseif ( ! empty( $this->options['analytics_profile'] ) && empty( $this->options['analytics_profile_code'] ) ) {
+		} elseif ( ! empty( $this->options['analytics_profile'] ) && empty( $this->options['analytics_profile_code'] ) ) {
 			// Analytics profile is still holding the UA code
 			$tracking_code = $this->options['analytics_profile'];
 		}
@@ -165,7 +161,7 @@ class Yoast_GA_Options {
 	/**
 	 * Convert a option value to a bool
 	 *
-	 * @param string $option_name
+	 * @param  string $option_name
 	 *
 	 * @return bool
 	 */
@@ -211,13 +207,13 @@ class Yoast_GA_Options {
 			}
 		}
 		// 5.1.2+ Remove firebug_lite from options, if set
-		if ( ! isset ( $this->options['version'] ) || version_compare( $this->options['version'], '5.1.2', '<' ) ) {
+		if ( ! isset( $this->options['version'] ) || version_compare( $this->options['version'], '5.1.2', '<' ) ) {
 			if ( isset( $this->options['firebug_lite'] ) ) {
 				unset( $this->options['firebug_lite'] );
 			}
 		}
 		// 5.2.8+ Add disabled dashboards option
-		if ( ! isset ( $this->options['dashboards_disabled'] ) || version_compare( $this->options['version'], '5.2.8', '>' ) ) {
+		if ( ! isset( $this->options['dashboards_disabled'] ) || version_compare( $this->options['version'], '5.2.8', '>' ) ) {
 			$this->options['dashboards_disabled'] = 0;
 		}
 		// Check is API option already exists - if not add it
