@@ -51,6 +51,7 @@ class Yoast_GA_Dashboards_Display {
 	 * *Singleton* via the `new` operator from outside of this class.
 	 */
 	protected function __construct() {
+
 		foreach ( $this->dashboard_types as $dashboard_type ) {
 			if ( ! $this->driver_exists( $dashboard_type ) ) {
 				$this->create_driver( $dashboard_type );
@@ -82,6 +83,7 @@ class Yoast_GA_Dashboards_Display {
 	 * @param array $dashboards
 	 */
 	public function add_dashboards( $dashboards ) {
+
 		// Save all dashboards to property - for future use
 		$this->dashboards = array_merge( $this->dashboards, $dashboards );
 
@@ -94,6 +96,7 @@ class Yoast_GA_Dashboards_Display {
 	 * @param array $dashboards
 	 */
 	private function register( $dashboards ) {
+
 		foreach ( $dashboards as $dashboard_name => $dashboard_settings ) {
 			if ( ! empty( $dashboard_settings['type'] ) ) {
 				$this->driver( $dashboard_settings['type'] )->register( $dashboard_name, $dashboard_settings );
@@ -126,6 +129,7 @@ class Yoast_GA_Dashboards_Display {
 	 * @return bool
 	 */
 	protected function driver_exists( $dashboard_type ) {
+
 		return array_key_exists( $dashboard_type, $this->drivers ) && is_object( $this->drivers[ $dashboard_type ] );
 	}
 
@@ -135,7 +139,8 @@ class Yoast_GA_Dashboards_Display {
 	 * @param string $dashboard_type
 	 */
 	protected function create_driver( $dashboard_type ) {
-		$driver_class                   = 'Yoast_GA_Dashboards_' . ucfirst( $dashboard_type );
+
+		$driver_class                     = 'Yoast_GA_Dashboards_' . ucfirst( $dashboard_type );
 		$this->drivers[ $dashboard_type ] = new $driver_class();
 	}
 
