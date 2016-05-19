@@ -35,7 +35,7 @@ class Yoast_GA_Admin_Menu {
 		$this->target_object = $target_object;
 
 		add_action( 'admin_menu', array( $this, 'create_admin_menu' ), 10 );
-		add_action('admin_head', array( $this, 'mi_add_styles_for_menu' ) );
+		add_action( 'admin_head', array( $this, 'mi_add_styles_for_menu' ) );
 
 		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
 			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
@@ -50,6 +50,7 @@ class Yoast_GA_Admin_Menu {
 	}
 
 	public function mi_add_styles_for_menu() {
+
 		?>
 		<style type="text/css">
 			@font-face {
@@ -62,7 +63,7 @@ class Yoast_GA_Admin_Menu {
 
 			#toplevel_page_yst_ga_dashboard .wp-menu-image:before,
 			.yst_ga_dashboard-menu-icon:before {
-			
+
 				font-family: "MonsterInsights" !important;
 				content: '\61';
 				font-style: normal !important;
@@ -89,6 +90,7 @@ class Yoast_GA_Admin_Menu {
 	 * Create the admin menu
 	 */
 	public function create_admin_menu() {
+
 		$menu_name = is_network_admin() ? 'extensions' : 'dashboard';
 
 		if ( $this->dashboards_disabled ) {
@@ -120,6 +122,7 @@ class Yoast_GA_Admin_Menu {
 	 * @return array
 	 */
 	private function prepare_submenu_page( $submenu_name, $submenu_slug, $font_color = '' ) {
+
 		return array(
 			'parent_slug'      => $this->parent_slug,
 			'page_title'       => __( 'Google Analytics by MonsterInsights:', 'google-analytics-for-wordpress' ) . ' ' . $submenu_name,
@@ -139,6 +142,7 @@ class Yoast_GA_Admin_Menu {
 	 * @return string
 	 */
 	private function parse_menu_title( $menu_title, $font_color ) {
+
 		if ( ! empty( $font_color ) ) {
 			$menu_title = '<span style="color:' . $font_color . '">' . $menu_title . '</span>';
 		}
@@ -152,6 +156,7 @@ class Yoast_GA_Admin_Menu {
 	 * @param array $submenu_page
 	 */
 	private function add_submenu_page( $submenu_page ) {
+
 		$page         = add_submenu_page( $submenu_page['parent_slug'], $submenu_page['page_title'], $submenu_page['menu_title'], $submenu_page['capability'], $submenu_page['menu_slug'], $submenu_page['submenu_function'] );
 		$is_dashboard = ( 'yst_ga_dashboard' === $submenu_page['menu_slug'] );
 		$this->add_assets( $page, $is_dashboard );
@@ -164,6 +169,7 @@ class Yoast_GA_Admin_Menu {
 	 * @param boolean $is_dashboard
 	 */
 	private function add_assets( $page, $is_dashboard ) {
+
 		add_action( 'admin_print_styles-' . $page, array( 'Yoast_GA_Admin_Assets', 'enqueue_styles' ) );
 		add_action( 'admin_print_styles-' . $page, array( 'Yoast_GA_Admin_Assets', 'enqueue_settings_styles' ) );
 		add_action( 'admin_print_scripts-' . $page, array( 'Yoast_GA_Admin_Assets', 'enqueue_scripts' ) );
@@ -181,11 +187,11 @@ class Yoast_GA_Admin_Menu {
 	 * @return void
 	 */
 	private function add_submenu_pages() {
+
 		foreach ( $this->get_submenu_types() as $submenu ) {
 			if ( isset( $submenu['color'] ) ) {
 				$submenu_page = $this->prepare_submenu_page( $submenu['label'], $submenu['slug'], $submenu['color'] );
-			}
-			else {
+			} else {
 				$submenu_page = $this->prepare_submenu_page( $submenu['label'], $submenu['slug'] );
 			}
 			$this->add_submenu_page( $submenu_page );
@@ -202,20 +208,20 @@ class Yoast_GA_Admin_Menu {
 	 * @return array
 	 */
 	private function get_submenu_types() {
+
 		/**
 		 * Array structure:
 		 *
 		 * array(
-		 *   $submenu_name => array(
+		 * $submenu_name => array(
 		 *        'color' => $font_color,
 		 *        'label' => __( 'text-label', 'google-analytics-for-wordpress' ),
 		 * 		  'slug'  => $menu_slug,
 		 *        ),
-		 *   ..,
+		 * ..,
 		 * )
 		 *
 		 * $font_color can be left empty.
-		 *
 		 */
 		$submenu_types = array();
 
