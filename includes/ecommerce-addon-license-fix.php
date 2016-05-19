@@ -1,5 +1,5 @@
 <?php
-if ( ! class_exists( 'MI_Product_GA_eCommerce', false ) && class_exists( 'MI_Product' ) ){
+if ( ! class_exists( 'MI_Product_GA_eCommerce', false ) && class_exists( 'MI_Product' ) ) {
 
 	/**
 	 * Class MI_Product_GA_eCommerce
@@ -37,7 +37,6 @@ if ( ! class_exists( 'MI_Product_GA_eCommerce', false ) && class_exists( 'MI_Pro
 		 * @since 3.0
 		 */
 		protected function setup_license_manager() {
-
 			$license_manager = new MI_Plugin_License_Manager( $this );
 			$license_manager->setup_hooks();
 
@@ -52,7 +51,7 @@ if ( ! class_exists( 'MI_Product_GA_eCommerce', false ) && class_exists( 'MI_Pro
 		 *
 		 * @since 3.0
 		 *
-		 * @param $extensions
+		 * @param        $extensions
 		 *
 		 * @return mixed
 		 */
