@@ -60,4 +60,3 @@ $extensions = $yoast_ga_admin->get_extensions();
 
 <?php
 echo $yoast_ga_admin->content_footer();
-?>
