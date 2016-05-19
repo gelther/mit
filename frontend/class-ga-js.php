@@ -11,7 +11,7 @@ class Yoast_GA_JS extends Yoast_GA_Tracking {
 	/**
 	 * Function to output the GA Tracking code in the wp_head()
 	 *
-	 * @param bool $return_array
+	 * @param  bool       $return_array
 	 *
 	 * @return null|array
 	 */
@@ -140,8 +140,8 @@ class Yoast_GA_JS extends Yoast_GA_Tracking {
 	/**
 	 * Ouput tracking link
 	 *
-	 * @param string $label
-	 * @param array  $matches
+	 * @param  string $label
+	 * @param  array  $matches
 	 *
 	 * @return mixed
 	 */
@@ -188,4 +188,3 @@ class Yoast_GA_JS extends Yoast_GA_Tracking {
 	}
 
 }
-
