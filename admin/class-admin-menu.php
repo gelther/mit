@@ -31,11 +31,10 @@ class Yoast_GA_Admin_Menu {
 	 * @param object $target_object
 	 */
 	public function __construct( $target_object ) {
-
 		$this->target_object = $target_object;
 
 		add_action( 'admin_menu', array( $this, 'create_admin_menu' ), 10 );
-		add_action('admin_head', array( $this, 'mi_add_styles_for_menu' ) );
+		add_action( 'admin_head', array( $this, 'mi_add_styles_for_menu' ) );
 
 		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
 			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
@@ -62,7 +61,7 @@ class Yoast_GA_Admin_Menu {
 
 			#toplevel_page_yst_ga_dashboard .wp-menu-image:before,
 			.yst_ga_dashboard-menu-icon:before {
-			
+
 				font-family: "MonsterInsights" !important;
 				content: '\61';
 				font-style: normal !important;
@@ -113,9 +112,9 @@ class Yoast_GA_Admin_Menu {
 	/**
 	 * Prepares an array that can be used to add a submenu page to the Google Analytics for Wordpress menu
 	 *
-	 * @param string $submenu_name
-	 * @param string $submenu_slug
-	 * @param string $font_color
+	 * @param  string $submenu_name
+	 * @param  string $submenu_slug
+	 * @param  string $font_color
 	 *
 	 * @return array
 	 */
@@ -133,8 +132,8 @@ class Yoast_GA_Admin_Menu {
 	/**
 	 * Parsing the menutitle
 	 *
-	 * @param string $menu_title
-	 * @param string $font_color
+	 * @param  string $menu_title
+	 * @param  string $font_color
 	 *
 	 * @return string
 	 */
@@ -206,16 +205,15 @@ class Yoast_GA_Admin_Menu {
 		 * Array structure:
 		 *
 		 * array(
-		 *   $submenu_name => array(
+		 * $submenu_name => array(
 		 *        'color' => $font_color,
 		 *        'label' => __( 'text-label', 'google-analytics-for-wordpress' ),
 		 * 		  'slug'  => $menu_slug,
 		 *        ),
-		 *   ..,
+		 * ..,
 		 * )
 		 *
 		 * $font_color can be left empty.
-		 *
 		 */
 		$submenu_types = array();
 
