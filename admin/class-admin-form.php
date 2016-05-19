@@ -46,7 +46,7 @@ class Yoast_GA_Admin_Form {
 			$button_label = __( 'Save changes', 'google-analytics-for-wordpress' );
 		}
 
-		$output = null;
+		$output  = null;
 		$output .= '<div class="ga-form ga-form-input">';
 		$output .= '<input type="submit" name="ga-form-' . $name . '" value="' . $button_label . '" class="button button-primary ga-form-submit" id="yoast-ga-form-submit-' . self::$form_namespace . '"';
 		if ( ! is_null( $onclick ) ) {
@@ -212,7 +212,6 @@ class Yoast_GA_Admin_Form {
 	 * @return string
 	 */
 	private static function option( $select_value, $value ) {
-
 		if ( is_array( $select_value ) ) {
 			if ( in_array( esc_attr( $value['id'] ), $select_value ) ) {
 				return '<option value="' . esc_attr( $value['id'] ) . '" selected="selected">' . esc_attr( stripslashes( $value['name'] ) ) . '</option>';
