@@ -42,7 +42,6 @@ class Yoast_GA_Admin_Assets {
 	 * Loading the assets for dashboard
 	 */
 	public static function enqueue_dashboard_assets() {
-
 		wp_enqueue_script( 'ga-admin-dashboard', self::get_asset_path( 'assets/js/yoast_ga_admin_dashboard' ) . self::file_ext( '.js' ), array(), GAWP_VERSION );
 		wp_enqueue_style( 'ga-admin-dashboard-css', self::get_asset_path( 'assets/css/yoast_ga_admin_dashboard' ) . self::file_ext( '.css' ), array(), GAWP_VERSION );
 
