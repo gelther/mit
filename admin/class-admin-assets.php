@@ -42,7 +42,6 @@ class Yoast_GA_Admin_Assets {
 	 * Loading the assets for dashboard
 	 */
 	public static function enqueue_dashboard_assets() {
-
 		wp_enqueue_script( 'ga-admin-dashboard', self::get_asset_path( 'assets/js/yoast_ga_admin_dashboard' ) . self::file_ext( '.js' ), array(), GAWP_VERSION );
 		wp_enqueue_style( 'ga-admin-dashboard-css', self::get_asset_path( 'assets/css/yoast_ga_admin_dashboard' ) . self::file_ext( '.css' ), array(), GAWP_VERSION );
 
@@ -67,7 +66,7 @@ class Yoast_GA_Admin_Assets {
 	/**
 	 * Getting the full path to given $asset
 	 *
-	 * @param string $asset
+	 * @param  string $asset
 	 *
 	 * @return string
 	 */
@@ -86,7 +85,7 @@ class Yoast_GA_Admin_Assets {
 	/**
 	 * Check whether we can include the minified version or not
 	 *
-	 * @param string $ext
+	 * @param  string $ext
 	 *
 	 * @return string
 	 */
