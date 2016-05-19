@@ -48,6 +48,7 @@ class Yoast_GA_Dashboards {
 	 * Construct on the dashboards class for GA
 	 */
 	protected function __construct() {
+
 		add_filter( 'ga_extend_dashboards', array( $this, 'extend_dashboards' ), 10, 1 );
 
 		$this->dashboards_disabled = Yoast_GA_Settings::get_instance()->dashboards_disabled();
@@ -59,6 +60,7 @@ class Yoast_GA_Dashboards {
 	 * @param integer $ga_profile_id
 	 */
 	public function init_dashboards( $ga_profile_id ) {
+
 		if ( ! $this->dashboards_disabled ) {
 			$dashboards = $this->get_default_dashboards();
 
@@ -83,6 +85,7 @@ class Yoast_GA_Dashboards {
 	 * @return mixed
 	 */
 	public function extend_dashboards( $dashboards ) {
+
 		// Initialize the dashboard graphs
 		Yoast_GA_Dashboards_Display::get_instance()->add_dashboards( $dashboards );
 
@@ -95,6 +98,7 @@ class Yoast_GA_Dashboards {
 	 * @return Yoast_GA_Dashboards
 	 */
 	public static function get_instance() {
+
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
@@ -110,6 +114,7 @@ class Yoast_GA_Dashboards {
 	 * @return bool
 	 */
 	public function register( $types ) {
+
 		if ( is_array( $types ) == false ) {
 			$types = array( $types );
 		}
@@ -129,6 +134,7 @@ class Yoast_GA_Dashboards {
 	 * Adding translations to ga-admin-dashboard
 	 */
 	public function add_dashboard_js_translations() {
+
 		// Now we can localize the script with our data.
 		$translation_array = array(
 			// For datatables
@@ -162,6 +168,7 @@ class Yoast_GA_Dashboards {
 	 * @return bool
 	 */
 	public function reset_dashboards_data() {
+
 		if ( ! $this->dashboards_disabled ) {
 			$dashboards = $this->get_default_dashboards();
 
@@ -186,6 +193,7 @@ class Yoast_GA_Dashboards {
 	 * @return array
 	 */
 	private function get_default_dashboards() {
+
 		return array(
 			'sessions'      => array(
 				'title' => __( 'Sessions', 'google-analytics-for-wordpress' ),
@@ -238,6 +246,7 @@ class Yoast_GA_Dashboards {
 	 * @return bool
 	 */
 	private function validate_dashboard_types( $types ) {
+
 		$valid = true;
 
 		if ( is_array( $types ) ) {
