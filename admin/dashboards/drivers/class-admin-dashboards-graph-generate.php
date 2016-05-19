@@ -65,7 +65,6 @@ class Yoast_GA_Dashboards_Graph_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * @return integer
 	 */
 	protected function filter_google_data( $google_data ) {
-
 		foreach ( $google_data['value'] as $unix_timestamp => $value ) {
 			if ( $this->is_date_in_period( $unix_timestamp ) ) {
 				$return[ $unix_timestamp ] = $value;
@@ -135,7 +134,6 @@ class Yoast_GA_Dashboards_Graph_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	 * @param integer $timestamp
 	 */
 	private function add_x_mapping( $timestamp ) {
-
 		$is_monday            = ( 'Mon' === date( 'D', $timestamp ) );
 		$this->mapping['x'][] = ( $is_monday ) ? date( $this->date_field . ' M', $timestamp ) : null;
 	}
@@ -151,4 +149,3 @@ class Yoast_GA_Dashboards_Graph_Generate extends Yoast_GA_Dashboards_Driver_Gene
 	}
 
 }
-
