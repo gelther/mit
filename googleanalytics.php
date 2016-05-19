@@ -43,24 +43,23 @@ define( 'GAWP_PATH', plugin_basename( __FILE__ ) );
 
 define( 'GAWP_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 
-function monsterinsights_needs_manual_update_check(){
+function monsterinsights_needs_manual_update_check() {
 	require_once 'includes/ecommerce-addon-license-fix.php';
 }
-add_action( 'plugins_loaded', 'monsterinsights_needs_manual_update_check');
+add_action( 'plugins_loaded', 'monsterinsights_needs_manual_update_check' );
 
 function welcome_to_monsterinsights_admin_notice() {
 	$user = get_current_user_id();
-	if ( !current_user_can('manage_options' ) ) {
+	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
 	if ( ! get_option( 'monsterinsights_welcome_' . $user, false ) ) { ?>
 		<div class="updated notice is-dismissible">
-			<p><?php echo sprintf(__( 'Google Analytics By Yoast is now MonsterInsights. Read about this transition %s here %s', 'google-analytics-for-wordpress'), '<a href="https://monsterinsights.com/welcome-to-monsterinsights">', '</a>' ); ?></p>
+			<p><?php echo sprintf( __( 'Google Analytics By Yoast is now MonsterInsights. Read about this transition %s here %s', 'google-analytics-for-wordpress' ), '<a href="https://monsterinsights.com/welcome-to-monsterinsights">', '</a>' ); ?></p>
 		</div>
-	<?php 
+	<?php
 	update_option( 'monsterinsights_welcome_' . $user, true );
 	}
-
 }
 add_action( 'admin_notices', 'welcome_to_monsterinsights_admin_notice' );
 
@@ -73,8 +72,8 @@ if ( is_admin() ) {
 	global $yoast_ga_admin;
 	$yoast_ga_admin = new Yoast_GA_Admin;
 
-}
-else {
+} else
+{
 	global $yoast_ga_frontend;
 	$yoast_ga_frontend = new Yoast_GA_Frontend;
 }
