@@ -30,10 +30,8 @@ class Yoast_Google_Analytics {
 
 	/**
 	 * Singleton
-	 *
 	 */
 	protected function __construct() {
-
 		if ( is_null( self::$instance ) ) {
 			self::$instance = $this;
 		}
@@ -60,12 +58,10 @@ class Yoast_Google_Analytics {
 		return self::$instance;
 	}
 
-
 	/**
 	 * Check if something went wrong with API calls to Google Analytics
 	 */
 	public function check_for_ga_issues() {
-
 		$last_run   = get_option( 'yst_ga_last_wp_run' );
 		$has_failed = get_option( 'yst_ga_api_call_fail', false );
 
@@ -80,7 +76,6 @@ class Yoast_Google_Analytics {
 
 			add_action( 'admin_notices', array( 'Yoast_Google_Analytics_Notice', $notice_type ) );
 		}
-
 	}
 
 	/**
@@ -129,7 +124,6 @@ class Yoast_Google_Analytics {
 	 * @return array|null
 	 */
 	public function do_request( $target_request_url ) {
-
 		$response = $this->client->do_request( $target_request_url );
 
 		if ( ! empty( $response ) ) {
@@ -138,9 +132,7 @@ class Yoast_Google_Analytics {
 				'body'     => json_decode( $response->getResponseBody(), true ),
 			);
 		}
-
 	}
-
 
 	/**
 	 * Check if client has a refresh token
@@ -253,7 +245,6 @@ class Yoast_Google_Analytics {
 	 * @return mixed
 	 */
 	private function format_profile_call( $response ) {
-
 		if ( isset( $response['response']['code'] ) && $response['response']['code'] == 200 ) {
 			if ( ! empty( $response['body']['items'] ) && is_array( $response['body']['items'] ) ) {
 				$accounts = array();
