@@ -250,4 +250,5 @@ class Yoast_GA_Dashboards {
 
 		return $valid;
 	}
+
 }
