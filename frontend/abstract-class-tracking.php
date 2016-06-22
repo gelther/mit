@@ -283,7 +283,6 @@ abstract class Yoast_GA_Tracking {
 
 	/**
 	 * Setting the filters for tracking outbound links
-	 *
 	 */
 	protected function track_outbound_filters() {
 		add_filter( 'the_content', array( $this, 'the_content' ), 99 );
@@ -301,7 +300,7 @@ abstract class Yoast_GA_Tracking {
 	 */
 	public function do_tracking() {
 		if ( $this->do_tracking === null ) {
-			$user = wp_get_current_user();
+			$user              = wp_get_current_user();
 			$this->do_tracking = true;
 
 			if ( 0 != $user->ID && isset( $this->options['ignore_users'] ) ) {
