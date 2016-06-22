@@ -65,4 +65,5 @@ class Yoast_GA_Dashboards_Data {
 	public static function reset( $type ) {
 		return update_option( 'yst_ga_' . $type, array() );
 	}
+
 }
