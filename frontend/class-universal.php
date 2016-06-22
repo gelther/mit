@@ -11,7 +11,7 @@ class Yoast_GA_Universal extends Yoast_GA_Tracking {
 	/**
 	 * Test helper function
 	 */
-	public function get_options(){
+	public function get_options() {
 		return $this->options;
 	}
 
@@ -83,10 +83,10 @@ class Yoast_GA_Universal extends Yoast_GA_Tracking {
 			}
 
 			/**
-			* Filter: 'yst_ga_filter_push_vars' - Allow changing the $gaq_push variables before scripts are required.
-			*
-			* @api array
-			*/
+			 * Filter: 'yst_ga_filter_push_vars' - Allow changing the $gaq_push variables before scripts are required.
+			 *
+			 * @api array
+			 */
 			if ( has_filter( 'yst_ga_filter_push_vars' ) && $value_to_push = apply_filters( 'yst_ga_filter_push_vars', $gaq_push ) ) {
 				$gaq_push[] = $value_to_push;
 			}
