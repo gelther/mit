@@ -188,4 +188,3 @@ class Yoast_GA_JS extends Yoast_GA_Tracking {
 	}
 
 }
-
