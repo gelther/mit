@@ -47,7 +47,7 @@ echo $yoast_ga_admin->content_head();
 						);
 						echo '</p></div>';
 					}
-					else if ( ! Yoast_Google_Analytics::get_instance()->has_refresh_token() ) {
+					elseif ( ! Yoast_Google_Analytics::get_instance()->has_refresh_token() ) {
 						echo '<div class="ga-promote"><p>';
 						echo sprintf(
 							__( 'Because we\'ve switched to a newer version of the Google Analytics API, you\'ll need to re-authenticate with Google Analytics. We\'re sorry for the inconvenience. You can %sre-authenticate your Google Analytics profile here%s.', 'google-analytics-for-wordpress' ),
@@ -86,7 +86,7 @@ echo $yoast_ga_admin->content_head();
 					);
 					echo '</p></div>';
 				}
-				else if ( ! Yoast_Google_Analytics::get_instance()->has_refresh_token() ) {
+				elseif ( ! Yoast_Google_Analytics::get_instance()->has_refresh_token() ) {
 					echo '<div class="ga-promote"><p>';
 					echo sprintf(
 						__( 'Because we\'ve switched to a newer version of the Google Analytics API, you\'ll need to re-authenticate with Google Analytics. We\'re sorry for the inconvenience. You can %sre-authenticate your Google Analytics profile here%s.', 'google-analytics-for-wordpress' ),
@@ -142,7 +142,7 @@ echo $yoast_ga_admin->content_head();
 				$return .= 'Site URL:                 ' . site_url() . "\n";
 				$return .= 'Home URL:                 ' . home_url() . "\n";
 				$return .= 'Multisite:                ' . ( is_multisite() ? 'Yes' : 'No' ) . "\n";
-				
+
 				// WordPress configuration
 				$return .= "\n" . '-- WordPress Configuration' . "\n\n";
 				$return .= 'Version:                  ' . get_bloginfo( 'version' ) . "\n";
@@ -151,25 +151,26 @@ echo $yoast_ga_admin->content_head();
 				$return .= 'Active Theme:             ' . $theme . "\n";
 				$return .= 'Show On Front:            ' . get_option( 'show_on_front' ) . "\n";
 				// Only show page specs if frontpage is set to 'page'
-				if( get_option( 'show_on_front' ) == 'page' ) {
-					$front_page_id = get_option( 'page_on_front' );
-					$blog_page_id = get_option( 'page_for_posts' );
-					$return .= 'Page On Front:            ' . ( $front_page_id != 0 ? get_the_title( $front_page_id ) . ' (#' . $front_page_id . ')' : 'Unset' ) . "\n";
-					$return .= 'Page For Posts:           ' . ( $blog_page_id != 0 ? get_the_title( $blog_page_id ) . ' (#' . $blog_page_id . ')' : 'Unset' ) . "\n";
+				if ( get_option( 'show_on_front' ) == 'page' ) {
+					$front_page_id  = get_option( 'page_on_front' );
+					$blog_page_id   = get_option( 'page_for_posts' );
+					$return        .= 'Page On Front:            ' . ( $front_page_id != 0 ? get_the_title( $front_page_id ) . ' (#' . $front_page_id . ')' : 'Unset' ) . "\n";
+					$return        .= 'Page For Posts:           ' . ( $blog_page_id != 0 ? get_the_title( $blog_page_id ) . ' (#' . $blog_page_id . ')' : 'Unset' ) . "\n";
 				}
-				$return .= 'ABSPATH:                  ' . ABSPATH . "\n";
+				$return         .= 'ABSPATH:                  ' . ABSPATH . "\n";
 				// Make sure wp_remote_post() is working
-				$request['cmd'] = '_notify-validate';
-				$params = array(
-					'sslverify'     => false,
-					'timeout'       => 60,
-					'user-agent'    => 'MI/' . GAWP_VERSION,
-					'body'          => $request
+				$request['cmd']  = '_notify-validate';
+				$params          = array(
+					'sslverify'  => false,
+					'timeout'    => 60,
+					'user-agent' => 'MI/' . GAWP_VERSION,
+					'body'       => $request
 				);
-				$response = wp_remote_post( 'https://www.paypal.com/cgi-bin/webscr', $params );
-				if( !is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
+				$response        = wp_remote_post( 'https://www.paypal.com/cgi-bin/webscr', $params );
+				if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
 					$WP_REMOTE_POST = 'wp_remote_post() works';
-				} else {
+				}
+				else {
 					$WP_REMOTE_POST = 'wp_remote_post() does not work';
 				}
 				$return .= 'Remote Post:              ' . $WP_REMOTE_POST . "\n";
@@ -191,43 +192,46 @@ echo $yoast_ga_admin->content_head();
 				// Must-use plugins
 				// NOTE: MU plugins can't show updates!
 				$muplugins = get_mu_plugins();
-				if( count( $muplugins > 0 ) ) {
+				if ( count( $muplugins > 0 ) ) {
 					$return .= "\n" . '-- Must-Use Plugins' . "\n\n";
-					foreach( $muplugins as $plugin => $plugin_data ) {
+					foreach ( $muplugins as $plugin => $plugin_data ) {
 						$return .= $plugin_data['Name'] . ': ' . $plugin_data['Version'] . "\n";
 					}
 
 				}
 				// WordPress active plugins
-				$return .= "\n" . '-- WordPress Active Plugins' . "\n\n";
-				$plugins = get_plugins();
-				$active_plugins = get_option( 'active_plugins', array() );
-				foreach( $plugins as $plugin_path => $plugin ) {
-					if( !in_array( $plugin_path, $active_plugins ) )
+				$return         .= "\n" . '-- WordPress Active Plugins' . "\n\n";
+				$plugins         = get_plugins();
+				$active_plugins  = get_option( 'active_plugins', array() );
+				foreach ( $plugins as $plugin_path => $plugin ) {
+					if ( ! in_array( $plugin_path, $active_plugins ) ) {
 						continue;
-					$update = ( array_key_exists( $plugin_path, $updates ) ) ? ' (needs update - ' . $updates[$plugin_path]->update->new_version . ')' : '';
+					}
+					$update  = ( array_key_exists( $plugin_path, $updates ) ) ? ' (needs update - ' . $updates[ $plugin_path ]->update->new_version . ')' : '';
 					$return .= $plugin['Name'] . ': ' . $plugin['Version'] . $update . "\n";
 				}
 
 				// WordPress inactive plugins
 				$return .= "\n" . '-- WordPress Inactive Plugins' . "\n\n";
-				foreach( $plugins as $plugin_path => $plugin ) {
-					if( in_array( $plugin_path, $active_plugins ) )
+				foreach ( $plugins as $plugin_path => $plugin ) {
+					if ( in_array( $plugin_path, $active_plugins ) ) {
 						continue;
-					$update = ( array_key_exists( $plugin_path, $updates ) ) ? ' (needs update - ' . $updates[$plugin_path]->update->new_version . ')' : '';
+					}
+					$update  = ( array_key_exists( $plugin_path, $updates ) ) ? ' (needs update - ' . $updates[ $plugin_path ]->update->new_version . ')' : '';
 					$return .= $plugin['Name'] . ': ' . $plugin['Version'] . $update . "\n";
 				}
 
-				if( is_multisite() ) {
+				if ( is_multisite() ) {
 					// WordPress Multisite active plugins
-					$return .= "\n" . '-- Network Active Plugins' . "\n\n";
-					$plugins = wp_get_active_network_plugins();
-					$active_plugins = get_site_option( 'active_sitewide_plugins', array() );
-					foreach( $plugins as $plugin_path ) {
+					$return         .= "\n" . '-- Network Active Plugins' . "\n\n";
+					$plugins         = wp_get_active_network_plugins();
+					$active_plugins  = get_site_option( 'active_sitewide_plugins', array() );
+					foreach ( $plugins as $plugin_path ) {
 						$plugin_base = plugin_basename( $plugin_path );
-						if( !array_key_exists( $plugin_base, $active_plugins ) )
+						if ( ! array_key_exists( $plugin_base, $active_plugins ) ) {
 							continue;
-						$update = ( array_key_exists( $plugin_path, $updates ) ) ? ' (needs update - ' . $updates[$plugin_path]->update->new_version . ')' : '';
+						}
+						$update  = ( array_key_exists( $plugin_path, $updates ) ) ? ' (needs update - ' . $updates[ $plugin_path ]->update->new_version . ')' : '';
 						$plugin  = get_plugin_data( $plugin_path );
 						$return .= $plugin['Name'] . ': ' . $plugin['Version'] . $update . "\n";
 					}
@@ -271,4 +275,3 @@ echo $yoast_ga_admin->content_head();
 
 <?php
 echo $yoast_ga_admin->content_footer();
-?>
