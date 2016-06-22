@@ -49,7 +49,6 @@ abstract class Yoast_GA_Dashboards_Driver {
 	 * @param mixed $values
 	 */
 	public function register( $dashboard, $values = false ) {
-
 		if ( ! is_array( $dashboard ) ) {
 			$dashboard = array( $dashboard => $values );
 		}
