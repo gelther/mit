@@ -143,7 +143,7 @@ class Yoast_Googleanalytics_Reporting {
 	 * @return array
 	 */
 	private function date_range( $current, $last, $step = '+1 day', $format = 'Y-m-d' ) {
-		$dates   = array();
+		$dates = array();
 
 		while ( $current <= $last ) {
 			$dates[] = date( $format, $current );
