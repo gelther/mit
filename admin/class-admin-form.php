@@ -31,7 +31,6 @@ class Yoast_GA_Admin_Form {
 		return '<form action="' . $action . '" method="post" id="yoast-ga-form-' . self::$form_namespace . '" class="yoast_ga_form">' . wp_nonce_field( 'save_settings', 'yoast_ga_nonce', null, false );
 	}
 
-
 	/**
 	 * Return the form end tag and the submit button
 	 *
@@ -46,7 +45,7 @@ class Yoast_GA_Admin_Form {
 			$button_label = __( 'Save changes', 'google-analytics-for-wordpress' );
 		}
 
-		$output = null;
+		$output  = null;
 		$output .= '<div class="ga-form ga-form-input">';
 		$output .= '<input type="submit" name="ga-form-' . $name . '" value="' . $button_label . '" class="button button-primary ga-form-submit" id="yoast-ga-form-submit-' . self::$form_namespace . '"';
 		if ( ! is_null( $onclick ) ) {
@@ -57,7 +56,6 @@ class Yoast_GA_Admin_Form {
 
 		return $output;
 	}
-
 
 	/**
 	 * Create a input form element with our labels and wrap them
@@ -170,7 +168,6 @@ class Yoast_GA_Admin_Form {
 		return $select;
 	}
 
-
 	/**
 	 * Generate a textarea field
 	 *
@@ -212,7 +209,6 @@ class Yoast_GA_Admin_Form {
 	 * @return string
 	 */
 	private static function option( $select_value, $value ) {
-
 		if ( is_array( $select_value ) ) {
 			if ( in_array( esc_attr( $value['id'] ), $select_value ) ) {
 				return '<option value="' . esc_attr( $value['id'] ) . '" selected="selected">' . esc_attr( stripslashes( $value['name'] ) ) . '</option>';
@@ -225,7 +221,6 @@ class Yoast_GA_Admin_Form {
 			return '<option value="' . esc_attr( $value['id'] ) . '" ' . selected( $select_value, $value['id'], false ) . '>' . esc_attr( stripslashes( $value['name'] ) ) . '</option>';
 		}
 	}
-
 
 	/**
 	 * Show a question mark with help
@@ -240,7 +235,6 @@ class Yoast_GA_Admin_Form {
 
 		return $help;
 	}
-
 
 	/**
 	 * Will parse the optgroups.
@@ -299,7 +293,6 @@ class Yoast_GA_Admin_Form {
 
 		return $optgroup;
 	}
-
 
 	/**
 	 * Getting the value from the option, if it doesn't exist return empty string
