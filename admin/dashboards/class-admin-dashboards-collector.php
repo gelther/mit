@@ -121,7 +121,6 @@ class Yoast_GA_Dashboards_Collector {
 		}
 	}
 
-
 	/**
 	 * Get the datetime when the aggregate data function was succesful
 	 *
